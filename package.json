@@ -1,0 +1,46 @@
+{
+  "name": "temac",
+  "version": "1.0.0",
+  "description": "temac",
+  "author": "Iñigo Fuente",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "@casl/ability": "^2.3.0",
+    "@casl/vue": "^0.4.1",
+    "axios": "^0.18.0",
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "chart.js": "^2.7.2",
+    "fecha": "^2.3.3",
+    "flag-icon-css": "^3.0.0",
+    "font-awesome": "^4.7.0",
+    "js-cookie": "^2.2.0",
+    "json-fn": "^1.1.1",
+    "jwt-decode": "^2.2.0",
+    "nuxt": "^1.0.0",
+    "simple-line-icons": "^2.4.1",
+    "vue-chartjs": "^3.3.2",
+    "vue-context": "^3.1.1",
+    "vue-multiselect": "^2.1.0",
+    "vue-resize-directive": "^1.0.1",
+    "vuedraggable": "^2.16.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.15.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-vue": "^4.0.0",
+    "node-sass": "^4.9.0",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
+    "sass-loader": "^7.0.3"
+  }
+}
