@@ -86,10 +86,14 @@ export default {
       // Prevent modal from closing
       // evt.preventDefault()
       let input = {}
+      let key=''
       if (this.grid.groups.length === 1) {
         input = this.grid.groups[0]
-        input.id = this.schema.id
-        input.name = this.schema.name
+        for (key in this.schema) {
+          if (key !== 'fields' && key !== 'groups' && key !== 'tabs') {
+            input[key] = this.schema[key]
+          }
+        }
         input.tabs = this.tabs
       } else {
         input = this.grid
@@ -98,8 +102,11 @@ export default {
         if (input.tabs[i].groups.length === 1) {
           let input2 = {}
           input2 = input.tabs[i].groups[0]
-          input2.id = input.tabs[i].id
-          input2.name = input.tabs[i].name
+          for (key in input.tabs[i]) {
+            if (key !== 'fields' && key !== 'groups') {
+              input2[key] = input.tabs[i][key]
+            }
+          }
           input.tabs[i] = input2
         }
       }

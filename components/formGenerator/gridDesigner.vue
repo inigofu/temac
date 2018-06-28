@@ -189,11 +189,12 @@ export default {
               xs_offset: obj.xs_offset,
               sm_offset: obj.sm_offset,
               md_offset: obj.md_offset,
-              lg_offset: obj.lg_offset
+              lg_offset: obj.lg_offset,
+              order: index
             }
             let key
             for (key in obj) {
-              if (key !== 'width' && key !== 'offset' && key !== 'xs' && key !== 'sm' && key !== 'md' && key !== 'lg' && key !== 'xs_offset' && key !== 'sm_offset' && key !== 'md_offset' && key !== 'lg_offset') {
+              if (key !== 'width' && key !== 'offset' && key !== 'xs' && key !== 'sm' && key !== 'md' && key !== 'lg' && key !== 'xs_offset' && key !== 'sm_offset' && key !== 'md_offset' && key !== 'lg_offset' && key !== 'order') {
                 tempobj[key] = obj[key]
               }
             }
@@ -208,6 +209,7 @@ export default {
         }
       }
       this.grid = previewcol
+      this.$emit('input', this.grid)
     },
     onMove ({relatedContext, draggedContext}) {
       const relatedElement = relatedContext.element

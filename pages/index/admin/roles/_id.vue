@@ -10,19 +10,15 @@ import { mapActions, mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'roles',
+  middleware: 'pagechange',
   data () {
     return {
-      id: null,
       modulename: 'roles',
       moduleurl: 'admin/roles'
     }
   },
-  beforeRouteUpdate (to, from, next) {
-    this.id = to.params.roles
-    next()
-  },
   mounted () {
-    if(this.id === null) {this.resetschema(false)}
+    this.resetschema(false)
     this.getSchemaVuex('28ca109d-4939-4ca4-bed0-f5fd1a11bdf2')
     this.getModelVuex()
     // this.getSchema()
@@ -33,7 +29,8 @@ export default {
       schemaLoaded: state => state.modules.form.schemaLoaded,
       modelLoaded (state) {
         return state.modules[this.modulename].modelLoaded
-      }
+      },
+      id: state => state.modules.form.id
     })
   },
   methods: {

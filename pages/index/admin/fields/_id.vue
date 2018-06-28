@@ -9,22 +9,19 @@
 import { mapActions, mapState, mapMutations } from 'vuex'
 
 export default {
-  name: 'users',
+  name: 'fields',
+  middleware: 'pagechange',
   data () {
     return {
-      id: null,
-      modulename: 'users',
-      moduleurl: 'admin/users'
+      modulename: 'fields',
+      moduleurl: 'admin/fields'
     }
   },
-  beforeRouteUpdate (to, from, next) {
-    this.id = to.params.users    
-    next()
-  },
-  mounted () {
-    if(this.id === null) {this.resetschema(false)}
-    this.getSchemaVuex('a98c0acd-ff66-482a-a8be-3f9be3c92e88')
-    this.getModelVuex()
+  async fetch ({ store, params }) {
+    console.log('fields fecth')
+    store.commit('modules/form/setSchemaLoaded', false)
+    store.dispatch('modules/form/getSchema','2c202af7-9404-447c-b38c-04fabeacdcfc')
+    store.dispatch('modules/fields/getModel')
     // this.getSchema()
     // this.getData()
   },
@@ -33,7 +30,8 @@ export default {
       schemaLoaded: state => state.modules.form.schemaLoaded,
       modelLoaded (state) {
         return state.modules[this.modulename].modelLoaded
-      }
+      },
+      id: state => state.modules.form.id
     })
   },
   methods: {

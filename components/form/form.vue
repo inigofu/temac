@@ -178,11 +178,9 @@ export default {
         let el = document.querySelector('div.form input:nth-child(1):not([readonly]):not(:disabled)')
         if (el) { el.focus() }
       } else {
-        console.log('id', newId)
         var row = this.rows.filter((p) => {
           return p.id === newId
         })
-        console.log('row', row)
         this.isNewModel = false
         this.model = cloneDeep(row[0])
       }
@@ -232,11 +230,9 @@ export default {
       this.isNewModel = false
       this.rowSelected = true
       this.changed = false
-      console.log('selectrow', '/' + this.moduleurl + '/' + record.id + '?')
       this.$router.push('/' + this.moduleurl + '/' + record.id + '?')
     },
     onValidated (name, res, errors) {
-      console.log('onValidated', res, errors, name)
       this.errors = this.errors.filter(function (el) { return el.name !== name })
       if (!res) {
         let temp = errors.map(function (error, index, array) {
@@ -248,7 +244,6 @@ export default {
           this.errors.push(err)
         })
       }
-      console.log('VFG validated:', res, errors)
     },
     newModel () {
       this.$router.push('/' + this.moduleurl + '/new')
@@ -388,6 +383,7 @@ export default {
 
   mounted () {
     // this.rows = users.users()
+    console.log('ability', this.$ability)
     if (document.documentElement.clientWidth < 991.98) {
       this.panWidth = '100%'
     } else {

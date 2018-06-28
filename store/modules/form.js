@@ -8,7 +8,8 @@ const state = () => ({
   rows: Array,
   model: null,
   schemaLoaded: false,
-  modelLoaded: false
+  modelLoaded: false,
+  id: null
 })
 
 const mutations = {
@@ -26,6 +27,9 @@ const mutations = {
   },
   setModelLoaded (state, loaded) {
     state.modelLoaded = loaded
+  },
+  setID(state, id) {
+    state.id = id
   }
 }
 
@@ -41,15 +45,12 @@ const actions = {
       })
   },
   getModel ({ commit, state, rootState }) {
-    console.log('form getmodel')
     services.form.getModel(rootState.modules.user.token)
       .then((response) => {
-        console.log('form getmodel')
         commit('setRows', response)
         commit('setModelLoaded', true)
       })
       .catch((error) => {
-        console.log('form getmodel', error)
         console.error(error)
       })
   },

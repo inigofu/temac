@@ -6,7 +6,7 @@
       <main class="main">
         <breadcrumb :list="list"/>
         <div class="container-fluid">
-          <router-view></router-view>
+          <nuxt-child/>
         </div>
       </main>
       <AppAside/>
@@ -30,21 +30,19 @@ export default {
   },
   computed: {
     ...mapState({
-      nav: state => state.modules.user.nav
+      nav: state => state.modules.user.nav,
+      rules: state => state.modules.user.rules
     }),
     name () {
       return this.$route.name
     },
     list () {
       return this.$route.matched
-    }
+    },
+    
   },
-  methods: {
-    ...mapActions({
-      validateToken (dispatch, payload) {
-        return dispatch('modules/user/validateToken', payload)
-      }
-    })
+  mounted(){
+    this.$ability.update(this.rules)
   },
   beforeDestroy: function () {
     // `this` points to the vm instance

@@ -6,10 +6,10 @@
     </a>
   </div>
   <div v-else>
-    <router-link :to="url" :class="classList">
+    <nuxt-link :to="url" :class="classList">
       <i :class="icon"></i> {{name}}
       <b-badge v-if="badge && badge.text" :variant="badge.variant">{{badge.text}}</b-badge>
-    </router-link>
+    </nuxt-link>
   </div>
 </template>
 

@@ -15,6 +15,7 @@
   "dependencies": {
     "@casl/ability": "^2.3.0",
     "@casl/vue": "^0.4.1",
+    "@nuxtjs/pwa": "^2.0.8",
     "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.11",
     "chart.js": "^2.7.2",
@@ -24,23 +25,30 @@
     "js-cookie": "^2.2.0",
     "json-fn": "^1.1.1",
     "jwt-decode": "^2.2.0",
+    "lodash-loader": "^2.0.0",
     "nuxt": "^1.0.0",
     "simple-line-icons": "^2.4.1",
-    "vue-chartjs": "^3.3.2",
     "vue-context": "^3.1.1",
     "vue-multiselect": "^2.1.0",
     "vue-resize-directive": "^1.0.1",
     "vuedraggable": "^2.16.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
     "babel-eslint": "^8.2.1",
+    "babel-plugin-lodash": "^3.3.4",
     "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-vue": "^4.0.0",
+    "glob-all": "^3.1.0",
     "node-sass": "^4.9.0",
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
-    "sass-loader": "^7.0.3"
+    "purgecss-webpack-plugin": "^1.2.0",
+    "sass-loader": "^7.0.3",
+    "vue-chartjs": "^3.3.2",
+    "webpack-bundle-analyzer": "^2.13.1"
   }
 }

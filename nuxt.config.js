@@ -1,3 +1,6 @@
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+const glob = require('glob-all')
+const path = require('path')
 module.exports = {
   /*
   ** Headers of the page
@@ -21,13 +24,24 @@ module.exports = {
   ** plugins
   */
   plugins: [
-    '~/plugins/components'
+    '~/plugins/components',
+    '~/plugins/casl'
+  ],
+  /*
+  ** modules
+  */
+  modules: [
+    '@nuxtjs/pwa'
   ],
   /*
   ** Build configuration
   */
   
   build: {
+     
+   analyze: { 
+    analyzerMode: 'static'
+    },
     /*
     ** Run ESLint on save
     */
@@ -40,7 +54,31 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
+      if (!isDev) {
+        // Remove unused CSS using purgecss. See https://github.com/FullHuman/purgecss
+        // for more information about purgecss.
+        config.plugins.push(
+          new PurgecssPlugin({
+            paths: glob.sync([
+              path.join(__dirname, './pages/**/*.vue'),
+              path.join(__dirname, './layouts/**/*.vue'),
+              path.join(__dirname, './components/**/*.vue')
+            ]),
+            whitelist: ['html', 'body']
+          })
+        )
+        config.module.rules.push({
+          'loader': 'babel-loader',
+          'test': /\.js$/,
+          'exclude': /node_modules/,
+          'query': {
+            'plugins': ['lodash'],
+            'presets': [['@babel/env', { 'targets': { 'node': 6 } }]]
+          }
+        })        
+      }
     },
+    vendor: ['@casl/vue']
   },
    /*
   ** Router configuration

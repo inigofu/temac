@@ -22,7 +22,7 @@ const mutations = {
   setnav (state, nav) {
     state.nav = nav
   },
-  settules (state, rules) {
+  setrules (state, rules) {
     state.rules = rules
   }
 }
@@ -39,12 +39,11 @@ const actions = {
     return new Promise((resolve, reject) => {
       services.user.login(credentials)
         .then((data) => {
-          console.log('login')
           var token = data.token.token
           commit('settoken', token)
           commit('setuser', data.user)
           commit('setnav', data.menues)
-          commit('settules', data.rules)
+          commit('setrules', data.rules)
           // Save to local storage as well
           setToken(token)
           Api().defaults.headers.common['Authorization'] = token ? `Bearer ${token}` : ''
@@ -63,7 +62,7 @@ const actions = {
             commit('settoken', token)
             commit('setuser', data.user)
             commit('setnav', data.menues)
-            commit('settules', data.rules)
+            commit('setrules', data.rules)
           } else {
             unsetToken()
           }

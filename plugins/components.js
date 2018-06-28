@@ -14,8 +14,6 @@ import MainChartExample from '~/components/dashboard/MainChartExample'
 import SocialBoxChartExample from '~/components/dashboard/SocialBoxChartExample'
 import CalloutChartExample from '~/components/dashboard/CalloutChartExample'
 import BootstrapVue from 'bootstrap-vue'
-import { abilitiesPlugin } from '@casl/vue'
-
 
 Vue.component('AppAside', AppAside)
 Vue.component('Breadcrumb', Breadcrumb)
@@ -32,4 +30,3 @@ Vue.component('SocialBoxChartExample', SocialBoxChartExample)
 Vue.component('CalloutChartExample', CalloutChartExample)
 Vue.component('customForm', CustomForm)
 Vue.use(BootstrapVue)
-Vue.use(abilitiesPlugin)
