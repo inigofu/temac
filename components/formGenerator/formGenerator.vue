@@ -41,7 +41,12 @@ div.vue-form-generator(v-if='schema != null')
 
 <script>
 // import Vue from "vue";
-import { get as objGet, forEach, isFunction, isNil, isArray, isString } from 'lodash'
+import { get as objGet} from 'lodash/get'
+import { forEach} from 'lodash/forEach'
+import { isFunction } from 'lodash/isFunction'
+import { isNil } from 'lodash/isNil'
+import { isArray } from 'lodash/isArray'
+import { isString } from 'lodash/isString'
 import { slugifyFormID } from './utils/schema'
 import { VueContext } from 'vue-context'
 

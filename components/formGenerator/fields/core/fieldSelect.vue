@@ -10,7 +10,9 @@
 </template>
 
 <script>
-import {isObject, isNil, find} from 'lodash'
+import {isObject} from 'lodash/isObject'
+import {isNil} from 'lodash/isNil'
+import {find} from 'lodash/find'
 import abstractField from '../abstractField'
 
 export default {

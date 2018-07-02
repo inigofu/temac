@@ -29,7 +29,7 @@
 <script>
 import griddesigner from './gridDesigner'
 import { mapState, mapActions } from 'vuex'
-import {clone} from 'lodash'
+import {clone} from 'lodash/clone'
 
 export default {
   name: 'gridcarrusel',

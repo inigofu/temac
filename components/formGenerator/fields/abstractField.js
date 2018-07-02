@@ -1,4 +1,9 @@
-import { get as objGet, forEach, isFunction, isString, isArray, debounce } from 'lodash'
+import { get as objGet } from 'lodash/get'
+import { forEach } from 'lodash/forEach'
+import { isFunction } from 'lodash/isFunction'
+import { isString } from 'lodash/isString'
+import { isArray } from 'lodash/isArray'
+import { debounce } from 'lodash/debounce'
 import validators from '../utils/validators'
 import { slugifyFormID } from '../utils/schema'
 

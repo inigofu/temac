@@ -1,5 +1,5 @@
 import { services } from '../api'
-import { clone } from 'lodash'
+import { clone } from 'lodash/clone'
 
 const state = () => ({
   fields: ['id',

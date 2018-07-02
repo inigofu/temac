@@ -1,7 +1,13 @@
 const PurgecssPlugin = require('purgecss-webpack-plugin')
+const webpack = require('webpack');
 const glob = require('glob-all')
 const path = require('path')
+const CompressionPlugin = require("compression-webpack-plugin")
+
 module.exports = {
+  render: {
+    gzip: { threshold: 6 }
+  },
   /*
   ** Headers of the page
   */
@@ -38,7 +44,13 @@ module.exports = {
   */
   
   build: {
-     
+    render: {
+      gzip: {
+      threshold: -1
+      }
+      },
+      
+      
    analyze: { 
     analyzerMode: 'static'
     },
@@ -65,17 +77,10 @@ module.exports = {
               path.join(__dirname, './components/**/*.vue')
             ]),
             whitelist: ['html', 'body']
-          })
-        )
-        config.module.rules.push({
-          'loader': 'babel-loader',
-          'test': /\.js$/,
-          'exclude': /node_modules/,
-          'query': {
-            'plugins': ['lodash'],
-            'presets': [['@babel/env', { 'targets': { 'node': 6 } }]]
-          }
-        })        
+          }),
+          new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+          new CompressionPlugin({ test: /\.js/})
+        )          
       }
     },
     vendor: ['@casl/vue']

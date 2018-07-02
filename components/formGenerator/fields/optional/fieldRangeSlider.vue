@@ -5,7 +5,8 @@
 <script>
 /* global $ */
 import abstractField from '../abstractField'
-import { defaults, isArray } from 'lodash'
+import { defaults } from 'lodash/defaults'
+import { isArray } from 'lodash/isArray'
 
 export default {
   mixins: [ abstractField ],

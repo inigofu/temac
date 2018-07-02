@@ -1,4 +1,8 @@
-import { isNil, isNumber, isInteger, isString, isArray } from 'lodash'
+import { isNil} from 'lodash/isNil'
+import { isNumber } from 'lodash/isNumber'
+import { isInteger } from 'lodash/isInteger'
+import { isString} from 'lodash/isString'
+import { isArray } from 'lodash/isArray'
 import fecha from 'fecha'
 
 let resources = {

@@ -9,7 +9,7 @@
   */
 
 import abstractField from '../abstractField'
-import { isFunction } from 'lodash'
+import { isFunction } from 'lodash/isFunction'
 
 /* global google */
 export default {
