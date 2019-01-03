@@ -1,22 +1,23 @@
 <template>
   <div :class="classnames" :style="{ cursor, userSelect }" @mousedown="onMouseDown">
-    <slot></slot>
+    <slot/>
   </div>
 </template>
 
-<script src="./multipane.js"></script>
+<script src="./multipane.js">
+</script>
 
 <style lang="scss">
 .multipane {
-    display: flex;
+  display: flex;
 
-    &.layout-h {
-        flex-direction: column;
-    }
+  &.layout-h {
+    flex-direction: column;
+  }
 
-    &.layout-v {
-        flex-direction: row;
-    }
+  &.layout-v {
+    flex-direction: row;
+  }
 }
 
 .multipane > div {

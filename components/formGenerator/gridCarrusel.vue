@@ -1,38 +1,41 @@
 <template>
-  <b-modal title="Grid designer" :size="'800'" :visible="gridModal" @ok="handleOk" @hidden="handleClose">
+  <b-modal :size="'800'" :visible="gridModal" title="Grid designer" @ok="handleOk" @hidden="handleClose">
     <template v-if="dataLoaded">
-        <b-carousel id="carousel1"
-                        style="text-shadow: 1px 1px 2px #333;"
-                        controls
-                        indicators
-                        background="#ababab"
-                        :interval="0"
-                        v-model="slide"
-                        class="application-frame"
-                        img-blank
-                        img-height="650"
-            >
+      <b-carousel id="carousel1"
+                  :interval="0"
+                  v-model="slide"
+                  style="text-shadow: 1px 1px 2px #333;"
+                  controls
+                  indicators
+                  background="#ababab"
+                  class="application-frame"
+                  img-blank
+                  img-height="650"
+      >
 
-            <!-- Text slides with image -->
-            <b-carousel-slide :caption="schema.name">
-                <griddesigner  :schema="schema" @input="updateGrid"/>
-            </b-carousel-slide>
-            <!-- Slides with custom text -->
-            <b-carousel-slide v-for="(tab,index) in tabs" :key="index" :caption="'Tab-' + tab.name" >
-                <griddesigner  :schema="tab" @input="updateTabs($event,index)"/>
-            </b-carousel-slide>
-            </b-carousel>
+        <!-- Text slides with image -->
+        <b-carousel-slide :caption="schema.name">
+          <griddesigner :schema="schema" @input="updateGrid"/>
+        </b-carousel-slide>
+        <!-- Slides with custom text -->
+        <b-carousel-slide v-for="(tab,index) in tabs" :key="index" :caption="'Tab-' + tab.name" >
+          <griddesigner :schema="tab" @input="updateTabs($event,index)"/>
+        </b-carousel-slide>
+      </b-carousel>
     </template>
   </b-modal>
 </template>
 
 <script>
-import griddesigner from './gridDesigner'
-import { mapState, mapActions } from 'vuex'
-import {clone} from 'lodash/clone'
+import griddesigner from "./gridDesigner"
+import { mapState, mapActions } from "vuex"
+import clone from "lodash/clone"
 
 export default {
-  name: 'gridcarrusel',
+  name: "Gridcarrusel",
+  components: {
+    griddesigner
+  },
   props: {
     gridModal: {
       type: Boolean,
@@ -41,18 +44,7 @@ export default {
     modulename: null,
     moduleurl: null
   },
-  watch: {
-    schema (newSchema, oldSchema) {
-      this.grid = clone(newSchema)
-      this.tabs = clone(newSchema.tabs)
-    }
-  },
-  created () {
-    this.grid = clone(this.schema)
-    this.tabs = clone(this.schema.tabs)
-    this.dataLoaded = true
-  },
-  data () {
+  data() {
     return {
       grid: Object,
       tabs: Array,
@@ -61,8 +53,16 @@ export default {
       tempSchema: null
     }
   },
-  components: {
-    griddesigner
+  watch: {
+    schema(newSchema, oldSchema) {
+      this.grid = clone(newSchema)
+      this.tabs = clone(newSchema.tabs)
+    }
+  },
+  created() {
+    this.grid = clone(this.schema)
+    this.tabs = clone(this.schema.tabs)
+    this.dataLoaded = true
   },
   computed: {
     ...mapState({
@@ -71,26 +71,26 @@ export default {
   },
   methods: {
     ...mapActions({
-      setSchema: 'modules/form/saveLayout'
+      setSchema: "modules/form/saveLayout"
     }),
-    updateGrid (e) {
+    updateGrid(e) {
       this.grid = e
     },
-    updateTabs (e, index) {
+    updateTabs(e, index) {
       this.tabs[index] = e
     },
-    handleClose (evt) {
-      this.$emit('close', false)
+    handleClose(evt) {
+      this.$emit("close", false)
     },
-    handleOk (evt) {
+    handleOk(evt) {
       // Prevent modal from closing
       // evt.preventDefault()
       let input = {}
-      let key=''
+      let key = ""
       if (this.grid.groups.length === 1) {
         input = this.grid.groups[0]
         for (key in this.schema) {
-          if (key !== 'fields' && key !== 'groups' && key !== 'tabs') {
+          if (key !== "fields" && key !== "groups" && key !== "tabs") {
             input[key] = this.schema[key]
           }
         }
@@ -103,7 +103,7 @@ export default {
           let input2 = {}
           input2 = input.tabs[i].groups[0]
           for (key in input.tabs[i]) {
-            if (key !== 'fields' && key !== 'groups') {
+            if (key !== "fields" && key !== "groups") {
               input2[key] = input.tabs[i][key]
             }
           }
@@ -111,7 +111,9 @@ export default {
         }
       }
       this.setSchema(input)
-        .then(response => { this.$router.push('/' + this.moduleurl + '/' + response) })
+        .then(response => {
+          this.$router.push("/" + this.moduleurl + "/" + response)
+        })
         .catch(response => {
           console.log(response)
         })
@@ -120,17 +122,17 @@ export default {
 }
 </script>
 <style>
-  .carousel-item {
-    min-width: 1170px;
-    min-height: 670px;
-  }
-  .carousel-control-prev{
-    width: 50px
-  }
-  .carousel-caption {
-      left: 50px
-  }
-  .carousel-control-next {
-      width: 50px
-  }
+.carousel-item {
+  min-width: 1170px;
+  min-height: 670px;
+}
+.carousel-control-prev {
+  width: 50px;
+}
+.carousel-caption {
+  left: 50px;
+}
+.carousel-control-next {
+  width: 50px;
+}
 </style>

@@ -2,65 +2,65 @@
   <div class="application-frame easing">
     <div class="panels-wrapper">
       <div class="navigator easing">
-        <div v-bind:class="['preview' , 'xs' , 'easing' ,preview==='xs' ? 'active' : '']" v-on:click= "selectPreview('xs')">
+        <div :class="['preview' , 'xs' , 'easing' ,preview==='xs' ? 'active' : '']" @click= "selectPreview('xs')">
           <div class="title-bar">
-            <div class="size-icon"><i class="icon-mobile-phone"> </i></div>
+            <div class="size-icon"><i class="icon-mobile-phone"/></div>
             <div class="title">Phone</div>
           </div>
           <div class="preview-container">
-            <div  class="preview-rows" style="width: 50.4px;">
-              <div  v-for="(group,index) in grid.groups" :key="index" class="preview-row">
+            <div class="preview-rows" style="width: 50.4px;">
+              <div v-for="(group,index) in grid.groups" :key="index" class="preview-row">
                 <div v-for="(col,indexcol) in group.fields" :key="indexcol" class="preview-col">
-                  <div class="preview-col-offset" v-bind:style = "{width : preview_xsoffset(col) + 'px'}"></div>
-                  <div class="preview-col-width" v-bind:style = "{width : preview_xs(col) + 'px'}"></div>
+                  <div :style = "{width : preview_xsoffset(col) + 'px'}" class="preview-col-offset"/>
+                  <div :style = "{width : preview_xs(col) + 'px'}" class="preview-col-width"/>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div v-bind:class="['preview' , 'sm' , 'easing' ,preview==='sm' ? 'active' : '']" v-on:click= "selectPreview('sm')">
+        <div :class="['preview' , 'sm' , 'easing' ,preview==='sm' ? 'active' : '']" @click= "selectPreview('sm')">
           <div class="title-bar">
-            <div class="size-icon"><i class="icon-tablet"> </i></div>
+            <div class="size-icon"><i class="icon-tablet"/></div>
             <div class="title">Tablet</div>
           </div>
           <div class="preview-container">
-            <div  class="preview-rows" style="width: 79.2px;">
-              <div  v-for="(group,index) in grid.groups" :key="index" class="preview-row">
+            <div class="preview-rows" style="width: 79.2px;">
+              <div v-for="(group,index) in grid.groups" :key="index" class="preview-row">
                 <div v-for="(col,indexcol) in group.fields" :key="indexcol" class="preview-col">
-                  <div class="preview-col-offset" v-bind:style = "{width : preview_smoffset(col) + 'px'}"></div>
-                  <div class="preview-col-width" v-bind:style = "{width : preview_sm(col) + 'px'}"></div>
+                  <div :style = "{width : preview_smoffset(col) + 'px'}" class="preview-col-offset"/>
+                  <div :style = "{width : preview_sm(col) + 'px'}" class="preview-col-width"/>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div v-bind:class="['preview' , 'md' , 'easing' ,preview==='md' ? 'active' : '']" v-on:click= "selectPreview('md')">
+        <div :class="['preview' , 'md' , 'easing' ,preview==='md' ? 'active' : '']" @click= "selectPreview('md')">
           <div class="title-bar">
-            <div class="size-icon"><i class="icon-laptop"> </i></div>
+            <div class="size-icon"><i class="icon-laptop"/></div>
             <div class="title">Desktop</div>
           </div>
           <div class="preview-container">
-            <div  class="preview-rows" style="width: 115.2px;">
-              <div  v-for="(group,index) in grid.groups" :key="index" class="preview-row">
+            <div class="preview-rows" style="width: 115.2px;">
+              <div v-for="(group,index) in grid.groups" :key="index" class="preview-row">
                 <div v-for="(col,indexcol) in group.fields" :key="indexcol" class="preview-col">
-                  <div class="preview-col-offset" v-bind:style = "{width : preview_mdoffset(col) + 'px'}"></div>
-                  <div class="preview-col-width" v-bind:style = "{width : preview_md(col) + 'px'}"></div>
+                  <div :style = "{width : preview_mdoffset(col) + 'px'}" class="preview-col-offset"/>
+                  <div :style = "{width : preview_md(col) + 'px'}" class="preview-col-width"/>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div v-bind:class="['preview' , 'lg' , 'easing' ,preview==='lg' ? 'active' : '']" v-on:click= "selectPreview('lg')">
+        <div :class="['preview' , 'lg' , 'easing' ,preview==='lg' ? 'active' : '']" @click= "selectPreview('lg')">
           <div class="title-bar">
-            <div class="size-icon"><i class="icon-desktop">  </i></div>
+            <div class="size-icon"><i class="icon-desktop"/></div>
             <div class="title">Large Desktop</div>
           </div>
           <div class="preview-container">
-            <div  class="preview-rows" style="width: 144px;">
-              <div  v-for="(group,index) in grid.groups" :key="index" class="preview-row">
+            <div class="preview-rows" style="width: 144px;">
+              <div v-for="(group,index) in grid.groups" :key="index" class="preview-row">
                 <div v-for="(col,indexcol) in group.fields" :key="indexcol" class="preview-col">
-                  <div class="preview-col-offset" v-bind:style = "{width : preview_lgoffset(col) + 'px'}"></div>
-                  <div class="preview-col-width" v-bind:style = "{width : preview_lg(col)+ 'px'}"></div>
+                  <div :style = "{width : preview_lgoffset(col) + 'px'}" class="preview-col-offset"/>
+                  <div :style = "{width : preview_lg(col)+ 'px'}" class="preview-col-width"/>
                 </div>
               </div>
             </div>
@@ -68,28 +68,26 @@
         </div>
       </div>
       <div class="workspace easing output-collapsed">
-        <div v-bind:class = "['sl-container', preview ]">
+        <div :class = "['sl-container', preview ]">
           <div class="columns">
-            <div class="columna"></div>
-            <div class="columna"></div>
-            <div class="columna"></div>
-            <div class="columna"></div>
-            <div class="columna"></div>
-            <div class="columna"></div>
-            <div class="columna"></div>
-            <div class="columna"></div>
-            <div class="columna"></div>
-            <div class="columna"></div>
-            <div class="columna"></div>
-            <div class="columna"></div>
+            <div class="columna"/>
+            <div class="columna"/>
+            <div class="columna"/>
+            <div class="columna"/>
+            <div class="columna"/>
+            <div class="columna"/>
+            <div class="columna"/>
+            <div class="columna"/>
+            <div class="columna"/>
+            <div class="columna"/>
+            <div class="columna"/>
+            <div class="columna"/>
           </div>
           <div class="rows">
-            <div v-for="(group,index) in grid.groups" :key="index" class="sl-row easing" id = "row-">
-              <draggable class="cols" element="div" v-model="group.fields" :options="dragOptions" :move="onMove" @start="drag=false" @end="onEndDrag">
+            <div v-for="(group,index) in grid.groups" id = "row-" :key="index" class="sl-row easing">
+              <draggable v-model="group.fields" :options="dragOptions" :move="onMove" class="cols" element="div" @start="drag=false" @end="onEndDrag">
 
-                  <resize-observer v-for="(col,indexcol) in group.fields" :key="indexcol" :preview="preview" :grid="[77,77]" :w="col.width" :x="col.offset" v-model="group.fields[indexcol]" :field="col" class="columna dragging" id="col-3" @resizing="onChange">
-
-                  </resize-observer>
+                <resize-observer v-for="(col,indexcol) in group.fields" id="col-3" :key="indexcol" :preview="preview" :grid="[77,77]" :w="col.width" :x="col.offset" v-model="group.fields[indexcol]" :field="col" class="columna dragging" @resizing="onChange"/>
 
               </draggable>
               <input class="row-name" placeholder="Name Row">
@@ -102,69 +100,73 @@
 </template>
 
 <script>
-import ResizeObserver from './resizeobserver'
+import ResizeObserver from "./resizeobserver"
 
-import draggable from 'vuedraggable'
+import draggable from "vuedraggable"
 
 export default {
-  name: 'griddesigner',
+  name: "Griddesigner",
+  components: {
+    ResizeObserver,
+    draggable
+  },
   props: {
     schema: Object,
     tag: {
       type: String,
-      default: 'fieldset',
-      validator: function (value) {
+      default: "fieldset",
+      validator: function(value) {
         return value.length > 0
       }
     }
   },
-  data () {
+  data() {
     return {
       editable: true,
       isDragging: false,
       delayedDragging: false,
       list: [],
       grid: Object,
-      msg: 'Welcome to Your Vue.js App',
-      preview: 'md'
+      msg: "Welcome to Your Vue.js App",
+      preview: "md"
     }
-  },
-  watch: {
-    schema () {
-      this.gridUpdate()
-    }
-  },
-  mounted () {
-    this.gridUpdate()
-    this.selectPreview('md')
   },
   computed: {
-    dragOptions () {
+    dragOptions() {
       return {
         animation: 0,
-        group: 'description',
+        group: "description",
         disabled: !this.editable,
-        ghostClass: 'ghost'
+        ghostClass: "ghost"
       }
     }
   },
-  components: {
-    ResizeObserver,
-    draggable
+  watch: {
+    schema() {
+      this.gridUpdate()
+    }
+  },
+  mounted() {
+    this.gridUpdate()
+    this.selectPreview("md")
   },
   methods: {
-    gridUpdate () {
+    gridUpdate() {
       if (this.schema.groups === undefined) {
         this.grid = {
           groups: [],
           name: null,
           id: null
         }
-        this.grid.groups = [{legend: 'New row',
-          fields: this.schema.fields}]
+        this.grid.groups = [
+          {
+            legend: "New row",
+            fields: this.schema.fields
+          }
+        ]
         let key
         for (key in this.schema) {
-          if (key !== 'fields') {
+          if (key !== "fields") {
             this.grid[key] = this.schema[key]
           }
         }
@@ -172,83 +174,97 @@ export default {
         this.grid = this.schema
       }
     },
-    onChange () {
-      this.$emit('input', this.grid)
+    onChange() {
+      this.$emit("input", this.grid)
     },
-    onEndDrag (evnt) {
+    onEndDrag(evnt) {
       let previewcol = {}
       previewcol.groups = []
       for (let i = 0; i < this.grid.groups.length; i++) {
         if (this.grid.groups[i].fields !== undefined) {
-          previewcol.groups.push({fields: this.grid.groups[i].fields.map(function (obj, index, array) {
-            let tempobj = {
-              xs: obj.xs,
-              sm: obj.sm,
-              md: obj.md,
-              lg: obj.lg,
-              xs_offset: obj.xs_offset,
-              sm_offset: obj.sm_offset,
-              md_offset: obj.md_offset,
-              lg_offset: obj.lg_offset,
-              order: index
-            }
-            let key
-            for (key in obj) {
-              if (key !== 'width' && key !== 'offset' && key !== 'xs' && key !== 'sm' && key !== 'md' && key !== 'lg' && key !== 'xs_offset' && key !== 'sm_offset' && key !== 'md_offset' && key !== 'lg_offset' && key !== 'order') {
-                tempobj[key] = obj[key]
+          previewcol.groups.push({
+            fields: this.grid.groups[i].fields.map(function(obj, index, array) {
+              let tempobj = {
+                xs: obj.xs,
+                sm: obj.sm,
+                md: obj.md,
+                lg: obj.lg,
+                xs_offset: obj.xs_offset,
+                sm_offset: obj.sm_offset,
+                md_offset: obj.md_offset,
+                lg_offset: obj.lg_offset,
+                order: index
               }
-            }
-            return tempobj
-          }, this)})
+              let key
+              for (key in obj) {
+                if (
+                  key !== "width" &&
+                  key !== "offset" &&
+                  key !== "xs" &&
+                  key !== "sm" &&
+                  key !== "md" &&
+                  key !== "lg" &&
+                  key !== "xs_offset" &&
+                  key !== "sm_offset" &&
+                  key !== "md_offset" &&
+                  key !== "lg_offset" &&
+                  key !== "order"
+                ) {
+                  tempobj[key] = obj[key]
+                }
+              }
+              return tempobj
+            }, this)
+          })
         }
       }
       let key
       for (key in this.grid) {
-        if (key !== 'groups') {
+        if (key !== "groups") {
           previewcol[key] = this.grid[key]
         }
       }
       this.grid = previewcol
-      this.$emit('input', this.grid)
+      this.$emit("input", this.grid)
     },
-    onMove ({relatedContext, draggedContext}) {
+    onMove({ relatedContext, draggedContext }) {
       const relatedElement = relatedContext.element
       const draggedElement = draggedContext.element
       return (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
     },
-    preview_xs (col) {
-      if (col.xs !== null | col.xs_offset === undefined) {
+    preview_xs(col) {
+      if ((col.xs !== null) | (col.xs_offset === undefined)) {
         return 47.4
       } else {
-        return 38 / 12 * col.xs
+        return (38 / 12) * col.xs
       }
     },
-    preview_xsoffset (col) {
-      if (col.xs_offset === null | col.xs_offset === undefined) {
+    preview_xsoffset(col) {
+      if ((col.xs_offset === null) | (col.xs_offset === undefined)) {
         return 0
       } else {
-        return 38 / 12 * col.xs_offset
+        return (38 / 12) * col.xs_offset
       }
     },
-    preview_sm (col) {
+    preview_sm(col) {
       if (col.sm !== null && col.sm !== undefined) {
-        return 60 / 12 * col.sm
+        return (60 / 12) * col.sm
       } else if (col.xs !== null && col.xs !== undefined) {
-        return 60 / 12 * col.xs
+        return (60 / 12) * col.xs
       } else {
         return 60
       }
     },
-    preview_smoffset (col) {
+    preview_smoffset(col) {
       if (col.sm_offset !== null && col.sm_offset !== undefined) {
-        return 60 / 12 * col.sm_offset
+        return (60 / 12) * col.sm_offset
       } else if (col.xs_offset !== null && col.xs_offset !== undefined) {
-        return 60 / 12 * col.xs_offset
+        return (60 / 12) * col.xs_offset
       } else {
         return 0
       }
     },
-    preview_md (col) {
+    preview_md(col) {
       if (col.md !== null && col.md !== undefined) {
         return 8 * col.md - 3
       } else if (col.sm !== null && col.sm !== undefined) {
@@ -259,7 +275,7 @@ export default {
         return 104
       }
     },
-    preview_mdoffset (col) {
+    preview_mdoffset(col) {
       if (col.md_offset !== null && col.md_offset !== undefined) {
         return 8 * col.md_offset
       } else if (col.sm_offset !== null && col.sm_offset !== undefined) {
@@ -270,7 +286,7 @@ export default {
         return 0
       }
     },
-    preview_lg (col) {
+    preview_lg(col) {
       if (col.lg !== null && col.lg !== undefined) {
         return 10 * col.lg - 3
       } else if (col.md !== null && col.md !== undefined) {
@@ -283,7 +299,7 @@ export default {
         return 130
       }
     },
-    preview_lgoffset (col) {
+    preview_lgoffset(col) {
       if (col.lg_offset !== null && col.lg_offset !== undefined) {
         return 10 * col.lg_offset
       } else if (col.md_offset !== null && col.md_offset !== undefined) {
@@ -296,103 +312,138 @@ export default {
         return 0
       }
     },
-    selectPreview (option) {
+    selectPreview(option) {
       this.preview = option
       let i = 0
       let previewcol = {}
       previewcol.groups = []
       for (i = 0; i < this.grid.groups.length; i++) {
-        previewcol.groups.push({fields: this.grid.groups[i].fields.map(function (obj, index, array) {
-          let width = 924
-          let offset = 0
-          switch (this.preview) {
-            case 'xs':
-              if (obj.xs !== null && obj.xs !== undefined) {
-                width = 77 * obj.xs
-              }
-              if (obj.xs_offset !== null && obj.xs_offset !== undefined) {
-                offset = 77 * obj.xs_offset
-              }
-              break
-            case 'sm':
-              if (obj.sm !== null && obj.sm !== undefined) {
-                width = 77 * obj.sm
-              } else if (obj.xs !== null && obj.xs !== undefined) {
-                width = 77 * obj.xs
-              }
-              if (obj.sm_offset !== null && obj.sm_offset !== undefined) {
-                offset = 77 * obj.sm_offset
-              } else if (obj.xs_offset !== null && obj.xs_offset !== undefined) {
-                offset = 77 * obj.xs_offset
-              }
-              break
-            case 'md':
-              if (obj.md !== null && obj.md !== undefined) {
-                width = 77 * obj.md
-              } else if (obj.sm !== null && obj.sm !== undefined) {
-                width = 77 * obj.sm
-              } else if (obj.xs !== null && obj.xs !== undefined) {
-                width = 77 * obj.xs
-              }
-              if (obj.md_offset !== null && obj.md_offset !== undefined) {
-                offset = 77 * obj.md_offset
-              } else if (obj.sm_offset !== null && obj.sm_offset !== undefined) {
-                offset = 77 * obj.sm_offset
-              } else if (obj.xs_offset !== null && obj.xs_offset !== undefined) {
-                offset = 77 * obj.xs_offset
-              }
-              break
-            case 'lg':
-              if (obj.lg !== null && obj.lg !== undefined) {
-                width = 77 * obj.lg
-              } else if (obj.md !== null && obj.md !== undefined) {
-                width = 77 * obj.md
-              } else if (obj.sm !== null && obj.sm !== undefined) {
-                width = 77 * obj.sm
-              } else if (obj.xs !== null && obj.xs !== undefined) {
-                width = 77 * obj.xs
-              }
-              if (obj.lg_offset !== null && obj.lg_offset !== undefined) {
-                offset = 77 * obj.lg_offset
-              } else if (obj.md_offset !== null && obj.md_offset !== undefined) {
-                offset = 77 * obj.md_offset
-              } else if (obj.sm_offset !== null && obj.sm_offset !== undefined) {
-                offset = 77 * obj.sm_offset
-              } else if (obj.xs_offset !== null && obj.xs_offset !== undefined) {
-                offset = 77 * obj.xs_offset
-              }
-              break
-          }
-          let offsetcount = 0
-          let widthcount = 0
-          if (offset > 0) { offsetcount = 1 }
-          if (width > 0) { widthcount = 1 }
-          width = width - (15 / (offsetcount + widthcount))
-          offset = offset - (15 / (offsetcount + widthcount))
-          let tempobj = {
-            width: width,
-            offset: offset,
-            xs: obj.xs,
-            sm: obj.sm,
-            md: obj.md,
-            lg: obj.lg,
-            xs_offset: obj.xs_offset,
-            sm_offset: obj.sm_offset,
-            md_offset: obj.md_offset,
-            lg_offset: obj.lg_offset
-          }
-          let key
-          for (key in obj) {
-            if (key !== 'width' && key !== 'offset' && key !== 'xs' && key !== 'sm' && key !== 'md' && key !== 'lg' && key !== 'xs_offset' && key !== 'sm_offset' && key !== 'md_offset' && key !== 'lg_offset') {
-              tempobj[key] = obj[key]
+        previewcol.groups.push({
+          fields: this.grid.groups[i].fields.map(function(obj, index, array) {
+            let width = 924
+            let offset = 0
+            switch (this.preview) {
+              case "xs":
+                if (obj.xs !== null && obj.xs !== undefined) {
+                  width = 77 * obj.xs
+                }
+                if (obj.xs_offset !== null && obj.xs_offset !== undefined) {
+                  offset = 77 * obj.xs_offset
+                }
+                break
+              case "sm":
+                if (obj.sm !== null && obj.sm !== undefined) {
+                  width = 77 * obj.sm
+                } else if (obj.xs !== null && obj.xs !== undefined) {
+                  width = 77 * obj.xs
+                }
+                if (obj.sm_offset !== null && obj.sm_offset !== undefined) {
+                  offset = 77 * obj.sm_offset
+                } else if (
+                  obj.xs_offset !== null &&
+                  obj.xs_offset !== undefined
+                ) {
+                  offset = 77 * obj.xs_offset
+                }
+                break
+              case "md":
+                if (obj.md !== null && obj.md !== undefined) {
+                  width = 77 * obj.md
+                } else if (obj.sm !== null && obj.sm !== undefined) {
+                  width = 77 * obj.sm
+                } else if (obj.xs !== null && obj.xs !== undefined) {
+                  width = 77 * obj.xs
+                }
+                if (obj.md_offset !== null && obj.md_offset !== undefined) {
+                  offset = 77 * obj.md_offset
+                } else if (
+                  obj.sm_offset !== null &&
+                  obj.sm_offset !== undefined
+                ) {
+                  offset = 77 * obj.sm_offset
+                } else if (
+                  obj.xs_offset !== null &&
+                  obj.xs_offset !== undefined
+                ) {
+                  offset = 77 * obj.xs_offset
+                }
+                break
+              case "lg":
+                if (obj.lg !== null && obj.lg !== undefined) {
+                  width = 77 * obj.lg
+                } else if (obj.md !== null && obj.md !== undefined) {
+                  width = 77 * obj.md
+                } else if (obj.sm !== null && obj.sm !== undefined) {
+                  width = 77 * obj.sm
+                } else if (obj.xs !== null && obj.xs !== undefined) {
+                  width = 77 * obj.xs
+                }
+                if (obj.lg_offset !== null && obj.lg_offset !== undefined) {
+                  offset = 77 * obj.lg_offset
+                } else if (
+                  obj.md_offset !== null &&
+                  obj.md_offset !== undefined
+                ) {
+                  offset = 77 * obj.md_offset
+                } else if (
+                  obj.sm_offset !== null &&
+                  obj.sm_offset !== undefined
+                ) {
+                  offset = 77 * obj.sm_offset
+                } else if (
+                  obj.xs_offset !== null &&
+                  obj.xs_offset !== undefined
+                ) {
+                  offset = 77 * obj.xs_offset
+                }
+                break
             }
-          }
-          return tempobj
-        }, this)})
+            let offsetcount = 0
+            let widthcount = 0
+            if (offset > 0) {
+              offsetcount = 1
+            }
+            if (width > 0) {
+              widthcount = 1
+            }
+            width = width - 15 / (offsetcount + widthcount)
+            offset = offset - 15 / (offsetcount + widthcount)
+            let tempobj = {
+              width: width,
+              offset: offset,
+              xs: obj.xs,
+              sm: obj.sm,
+              md: obj.md,
+              lg: obj.lg,
+              xs_offset: obj.xs_offset,
+              sm_offset: obj.sm_offset,
+              md_offset: obj.md_offset,
+              lg_offset: obj.lg_offset
+            }
+            let key
+            for (key in obj) {
+              if (
+                key !== "width" &&
+                key !== "offset" &&
+                key !== "xs" &&
+                key !== "sm" &&
+                key !== "md" &&
+                key !== "lg" &&
+                key !== "xs_offset" &&
+                key !== "sm_offset" &&
+                key !== "md_offset" &&
+                key !== "lg_offset"
+              ) {
+                tempobj[key] = obj[key]
+              }
+            }
+            return tempobj
+          }, this)
+        })
       }
       let key
       for (key in this.grid) {
-        if (key !== 'groups') {
+        if (key !== "groups") {
           previewcol[key] = this.grid[key]
         }
       }
@@ -436,14 +487,54 @@ input {
   outline: none;
 }
 .easing {
-  transition: width 0.5s, margin 0.5s, height 0.5s, top 0.5s, left 0.5s, right 0.5s, background 0.5s, opacity 0.5s, font-size 0.3s;
-  -webkit-transition: width 0.5s, margin 0.5s, height 0.5s, top 0.5s, left 0.5s, right 0.5s, background 0.5s, opacity 0.5s, font-size 0.3s;
+  transition: width 0.5s, margin 0.5s, height 0.5s, top 0.5s, left 0.5s,
+    right 0.5s, background 0.5s, opacity 0.5s, font-size 0.3s;
+  -webkit-transition: width 0.5s, margin 0.5s, height 0.5s, top 0.5s, left 0.5s,
+    right 0.5s, background 0.5s, opacity 0.5s, font-size 0.3s;
 }
 .no-changes {
-  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.72, rgba(255, 255, 255, 0.15)), color-stop(0.72, transparent), to(transparent));
-  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 72%, transparent 72%, transparent);
-  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 72%, transparent 72%, transparent);
-  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 72%, transparent 72%, transparent);
+  background-image: -webkit-gradient(
+    linear,
+    0 100%,
+    100% 0,
+    color-stop(0.25, rgba(255, 255, 255, 0.15)),
+    color-stop(0.25, transparent),
+    color-stop(0.5, transparent),
+    color-stop(0.5, rgba(255, 255, 255, 0.15)),
+    color-stop(0.72, rgba(255, 255, 255, 0.15)),
+    color-stop(0.72, transparent),
+    to(transparent)
+  );
+  background-image: -webkit-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 72%,
+    transparent 72%,
+    transparent
+  );
+  background-image: -moz-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 72%,
+    transparent 72%,
+    transparent
+  );
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 72%,
+    transparent 72%,
+    transparent
+  );
   background-size: 20px 20px;
 }
 .blackout-overlay {
@@ -502,7 +593,15 @@ input {
   border-right: 5px solid #292929;
 }
 .navigator .preview {
-  background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(#292929), to(#1c1c1c));
+  background-image: -webkit-gradient(
+    radial,
+    center center,
+    0,
+    center center,
+    460,
+    from(#292929),
+    to(#1c1c1c)
+  );
   background-image: -webkit-radial-gradient(circle, #292929, #1c1c1c);
   background-image: -moz-radial-gradient(circle, #292929, #1c1c1c);
   background-image: radial-gradient(circle, #292929, #1c1c1c);
@@ -513,7 +612,15 @@ input {
 }
 .navigator .preview:hover {
   background-color: #243a47;
-  background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(#1b2c36), to(#0f191f));
+  background-image: -webkit-gradient(
+    radial,
+    center center,
+    0,
+    center center,
+    460,
+    from(#1b2c36),
+    to(#0f191f)
+  );
   background-image: -webkit-radial-gradient(circle, #1b2c36, #0f191f);
   background-image: -moz-radial-gradient(circle, #1b2c36, #0f191f);
   background-image: radial-gradient(circle, #1b2c36, #0f191f);
@@ -524,7 +631,15 @@ input {
 }
 .navigator .preview.active {
   background-color: #243a47;
-  background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(#243a47), to(#1a2a33));
+  background-image: -webkit-gradient(
+    radial,
+    center center,
+    0,
+    center center,
+    460,
+    from(#243a47),
+    to(#1a2a33)
+  );
   background-image: -webkit-radial-gradient(circle, #243a47, #1a2a33);
   background-image: -moz-radial-gradient(circle, #243a47, #1a2a33);
   background-image: radial-gradient(circle, #243a47, #1a2a33);
@@ -532,7 +647,13 @@ input {
 }
 .navigator .preview.active .title-bar {
   color: #ffffff;
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#276b96), to(#0a598a));
+  background-image: -webkit-gradient(
+    linear,
+    left 0%,
+    left 100%,
+    from(#276b96),
+    to(#0a598a)
+  );
   background-image: -webkit-linear-gradient(top, #276b96, 0%, #0a598a, 100%);
   background-image: -moz-linear-gradient(top, #276b96 0%, #0a598a 100%);
   background-image: linear-gradient(to bottom, #276b96 0%, #0a598a 100%);
@@ -545,8 +666,15 @@ input {
   font-size: 18px;
   padding: 5px 0px 5px 10px;
   font-weight: 600;
-  font-family: "proxima-nova-alt-condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#1b1d1d), to(#151313));
+  font-family: "proxima-nova-alt-condensed", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  background-image: -webkit-gradient(
+    linear,
+    left 0%,
+    left 100%,
+    from(#1b1d1d),
+    to(#151313)
+  );
   background-image: -webkit-linear-gradient(top, #1b1d1d, 0%, #151313, 100%);
   background-image: -moz-linear-gradient(top, #1b1d1d 0%, #151313 100%);
   background-image: linear-gradient(to bottom, #1b1d1d 0%, #151313 100%);
@@ -560,7 +688,6 @@ input {
 
   display: table;
   /* 2 */
-
 }
 .navigator .preview .title-bar:after {
   clear: both;
@@ -572,7 +699,6 @@ input {
 
   display: table;
   /* 2 */
-
 }
 .navigator .preview .title-bar:after {
   clear: both;
@@ -657,7 +783,7 @@ input {
   left: 176px;
   overflow-y: scroll;
   background-color: #ffffff;
-  overflow-y:auto;
+  overflow-y: auto;
 }
 .workspace.medias-collapsed {
   left: 50px;
@@ -703,7 +829,7 @@ input {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  display: inline-block
+  display: inline-block;
 }
 .rows .sl-row.active {
   background: rgba(89, 156, 255, 0.5);
@@ -781,7 +907,7 @@ input {
   overflow: hidden;
   position: relative;
   height: 100%;
-  overflow-y:auto;
+  overflow-y: auto;
   margin: 0 auto;
 }
 .sl-container.xs .sl-row {
@@ -838,7 +964,7 @@ input {
   margin-right: 15px;
   margin-bottom: 10px;
   background: transparent;
-  resize: horizontal
+  resize: horizontal;
 }
 .sl-container .columna:first-child {
   margin-left: 0;
@@ -960,7 +1086,8 @@ input {
 }
 pre.prettyprint {
   background-color: transparent;
-  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco, Consolas, monospace;
+  font-family: Menlo, "Bitstream Vera Sans Mono", "DejaVu Sans Mono", Monaco,
+    Consolas, monospace;
   font-size: 12px;
   line-height: 1.5;
   border: 1px solid #cccccc;
@@ -1058,7 +1185,8 @@ ul.edn-cols {
   margin: 0;
 }
 @font-face {
-  font-family: 'BLOKKNeue-Regular';}
+  font-family: "BLOKKNeue-Regular";
+}
 body.preview {
   color: #cccccc;
   background-color: #ffffff;
@@ -1092,7 +1220,7 @@ body.preview {
   min-height: 1.5em;
 }
 .preview-pane .wrap .preview-text:hover {
-  background: #FFFDC8;
+  background: #fffdc8;
 }
 .preview-pane .wrap .preview-image {
   background: #ccc;

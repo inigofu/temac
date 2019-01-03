@@ -7,36 +7,40 @@
 </template>
 
 <script>
-import {isObject} from 'lodash/isObject'
-import abstractField from '../abstractField'
+import isObject from "lodash/isObject"
+import abstractField from "../abstractField"
 
 export default {
-  mixins: [ abstractField ],
+  mixins: [abstractField],
 
   computed: {
-    items () {
+    items() {
       let values = this.schema.values
-      if (typeof (values) === 'function') {
+      if (typeof values === "function") {
         return values.apply(this, [this.model, this.schema])
       } else {
         return values
       }
     },
-    id () {
+    id() {
       return this.schema.model
     }
   },
 
   methods: {
-    getItemValue (item) {
+    getItemValue(item) {
       if (isObject(item)) {
-        if (typeof this.schema['radiosOptions'] !== 'undefined' && typeof this.schema['radiosOptions']['value'] !== 'undefined') {
+        if (
+          typeof this.schema["radiosOptions"] !== "undefined" &&
+          typeof this.schema["radiosOptions"]["value"] !== "undefined"
+        ) {
           return item[this.schema.radiosOptions.value]
         } else {
-          if (typeof item['value'] !== 'undefined') {
+          if (typeof item["value"] !== "undefined") {
             return item.value
           } else {
-            var err = '`value` is not defined. If you want to use another key name, add a `value` property under `radiosOptions` in the schema. https://icebob.gitbooks.io/vueformgenerator/content/fields/radios.html#radios-field-with-object-values'
+            var err =
+              "`value` is not defined. If you want to use another key name, add a `value` property under `radiosOptions` in the schema. https://icebob.gitbooks.io/vueformgenerator/content/fields/radios.html#radios-field-with-object-values"
             throw err
           }
         }
@@ -44,15 +48,19 @@ export default {
         return item
       }
     },
-    getItemName (item) {
+    getItemName(item) {
       if (isObject(item)) {
-        if (typeof this.schema['radiosOptions'] !== 'undefined' && typeof this.schema['radiosOptions']['name'] !== 'undefined') {
+        if (
+          typeof this.schema["radiosOptions"] !== "undefined" &&
+          typeof this.schema["radiosOptions"]["name"] !== "undefined"
+        ) {
           return item[this.schema.radiosOptions.name]
         } else {
-          if (typeof item['name'] !== 'undefined') {
+          if (typeof item["name"] !== "undefined") {
             return item.name
           } else {
-            var err = '`name` is not defined. If you want to use another key name, add a `name` property under `radiosOptions` in the schema. https://icebob.gitbooks.io/vueformgenerator/content/fields/radios.html#radios-field-with-object-values'
+            var err =
+              "`name` is not defined. If you want to use another key name, add a `name` property under `radiosOptions` in the schema. https://icebob.gitbooks.io/vueformgenerator/content/fields/radios.html#radios-field-with-object-values"
             throw err
           }
         }
@@ -60,28 +68,26 @@ export default {
         return item
       }
     },
-    onSelection (item) {
+    onSelection(item) {
       this.value = this.getItemValue(item)
     },
-    isItemChecked (item) {
+    isItemChecked(item) {
       let currentValue = this.getItemValue(item)
-      return (currentValue === this.value)
+      return currentValue === this.value
     }
   }
 }
 </script>
 
 <style lang="scss">
-  .vue-form-generator .field-radios {
-
-    .radio-list {
-      label {
-        display: block;
-        input[type="radio"]{
-          margin-right: 5px;
-        }
+.vue-form-generator .field-radios {
+  .radio-list {
+    label {
+      display: block;
+      input[type="radio"] {
+        margin-right: 5px;
       }
     }
-
   }
+}
 </style>

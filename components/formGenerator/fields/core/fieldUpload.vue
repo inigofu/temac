@@ -14,13 +14,13 @@
 </template>
 
 <script>
-import abstractField from '../abstractField'
-import { isFunction } from 'lodash/isFunction'
+import abstractField from "../abstractField"
+import isFunction from "lodash/isFunction"
 
 export default {
   mixins: [abstractField],
   methods: {
-    onChange ($event) {
+    onChange($event) {
       if (isFunction(this.schema.onChanged)) {
         // Schema has defined onChange method.
         this.schema.onChanged.call(this, this.model, this.schema, $event, this)
@@ -28,16 +28,15 @@ export default {
     }
   }
 }
-
 </script>
 
 <style lang="scss">
-  .vue-form-generator .field-input {
-    .wrapper {
-      width: 100%
-    }
-    .helper {
-      margin: auto 0.5em
-    }
+.vue-form-generator .field-input {
+  .wrapper {
+    width: 100%;
   }
+  .helper {
+    margin: auto 0.5em;
+  }
+}
 </style>

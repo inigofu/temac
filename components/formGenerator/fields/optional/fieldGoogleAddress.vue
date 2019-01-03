@@ -4,55 +4,62 @@
 
 <script>
 /**
-  * Based on gocanto"s Google Autocomplete library
-  * https://github.com/gocanto/google-autocomplete
-  */
+ * Based on gocanto"s Google Autocomplete library
+ * https://github.com/gocanto/google-autocomplete
+ */
 
-import abstractField from '../abstractField'
-import { isFunction } from 'lodash/isFunction'
+import abstractField from "../abstractField"
+import isFunction from "lodash/isFunction"
 
 /* global google */
 export default {
-  mixins: [ abstractField ],
+  mixins: [abstractField],
 
-  data: function () {
+  data: function() {
     return {
       // google autocomplete object
-      'autocomplete': '',
+      autocomplete: "",
 
       // google inputs retrieved
-      'inputs': {
-        street_number: 'long_name',
-        route: 'long_name',
-        country: 'long_name',
-        administrative_area_level_1: 'long_name',
-        administrative_area_level_2: 'long_name',
-        locality: 'long_name',
-        postal_code: 'short_name'
+      inputs: {
+        street_number: "long_name",
+        route: "long_name",
+        country: "long_name",
+        administrative_area_level_1: "long_name",
+        administrative_area_level_2: "long_name",
+        locality: "long_name",
+        postal_code: "short_name"
       }
     }
   },
 
-  mounted () {
-    this.$nextTick(function () {
-      if (window.google && window.google.maps && window.google.maps.places && window.google.maps.places.Autocomplete) {
+  mounted() {
+    this.$nextTick(function() {
+      if (
+        window.google &&
+        window.google.maps &&
+        window.google.maps.places &&
+        window.google.maps.places.Autocomplete
+      ) {
         this.autocomplete = new google.maps.places.Autocomplete(this.$el, {
-          types: ['geocode']
+          types: ["geocode"]
         })
 
-        this.autocomplete.addListener('place_changed', this.pipeAddress)
+        this.autocomplete.addListener("place_changed", this.pipeAddress)
       } else {
-        console.warn('Google Maps API is missing. Please add https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&libraries=places script in the HTML head section!')
+        console.warn(
+          "Google Maps API is missing. Please add https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&libraries=places script in the HTML head section!"
+        )
       }
     })
   },
 
   methods: {
     /**
-      * Look up places and dispatch an event.
-      * @return void
-      */
-    pipeAddress: function () {
+     * Look up places and dispatch an event.
+     * @return void
+     */
+    pipeAddress: function() {
       let place = this.autocomplete.getPlace()
       if (place) {
         this.value = place.formatted_address
@@ -68,17 +75,25 @@ export default {
         }
 
         // Call event in schema
-        if (isFunction(this.schema.onPlaceChanged)) { this.schema.onPlaceChanged(this.value, data, place, this.model, this.schema) }
+        if (isFunction(this.schema.onPlaceChanged)) {
+          this.schema.onPlaceChanged(
+            this.value,
+            data,
+            place,
+            this.model,
+            this.schema
+          )
+        }
       }
     },
 
     /**
-      * Get the user location.
-      * @return void
-      */
-    geolocate: function () {
+     * Get the user location.
+     * @return void
+     */
+    geolocate: function() {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
+        navigator.geolocation.getCurrentPosition(position => {
           let geolocation = {
             lat: position.coords.latitude,
             lng: position.coords.longitude

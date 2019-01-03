@@ -1,35 +1,39 @@
-import Api from './api'
+import Api from "./api"
 
 export default {
-  login (credentials) {
+  login(credentials) {
     return new Promise((resolve, reject) => {
-      Api().post('/rpc', {
-        request: {
-          email: credentials.username,
-          password: credentials.password
-        },
-        service: 'shippy.auth',
-        method: 'Auth.Login'
-      })
+      Api()
+        .post("/rpc", {
+          request: {
+            email: credentials.username,
+            password: credentials.password
+          },
+          service: "temac.auth",
+          method: "Auth.Login"
+        })
         .then(({ data }) => {
           resolve(data)
-        }).catch((error) => {
+        })
+        .catch(error => {
           reject(error)
         })
     })
   },
-  validateToken (token) {
+  validateToken(token) {
     return new Promise((resolve, reject) => {
-      Api().post('/rpc', {
-        request: {
-          token: token ? `Bearer ${token}` : ''
-        },
-        service: 'shippy.auth',
-        method: 'Auth.UserToken'
-      })
+      Api()
+        .post("/rpc", {
+          request: {
+            token: token ? `Bearer ${token}` : ""
+          },
+          service: "temac.auth",
+          method: "Auth.UserToken"
+        })
         .then(({ data }) => {
           resolve(data)
-        }).catch((error) => {
+        })
+        .catch(error => {
           reject(error)
         })
     })

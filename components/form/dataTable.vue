@@ -1,17 +1,9 @@
 <template >
-  <b-table id="tabladatos" v-bind:stacked="stacked" hover :items="rows" :fields="fields" :filter="filter" v-on:row-clicked="select" >
-  </b-table>
+  <b-table id="tabladatos" :stacked="stacked" :items="rows" :fields="fields" :filter="filter" hover @row-clicked="select" />
 </template>
 
 <script>
-
 export default {
-  props: [
-    'rows',
-    'select',
-    'fields',
-    'stacked',
-    'filter'
-  ]
+  props: ["rows", "select", "fields", "stacked", "filter"]
 }
 </script>

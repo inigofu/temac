@@ -1,26 +1,26 @@
 <template>
   <div class="wrapper">
     <template v-if="schemaLoaded && modelLoaded">
-    <customForm :propID="id" :modulename="modulename" :moduleurl="moduleurl"> </customForm>
+      <customForm :propid="id" :modulename="modulename" :moduleurl="moduleurl"/>
     </template>
   </div>
 </template>
 <script>
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions, mapState, mapMutations } from "vuex"
 
 export default {
-  name: 'formpage',
-  middleware: 'pagechange',
-  data () {
-    return {     
-      modulename: 'form',
-      moduleurl: 'admin/form'
+  name: "Formpage",
+  middleware: "pagechange",
+  data() {
+    return {
+      modulename: "form",
+      moduleurl: "admin/form"
     }
   },
-  
-  mounted () {
+
+  mounted() {
     this.resetschema(false)
-    this.getSchemaVuex('44e75d5d-13ac-44a8-a46c-dc4bcdef80bd')
+    this.getSchemaVuex("16acdb72-2c23-488e-92c1-66a083eb81ac")
     this.getModelVuex()
   },
   computed: {
@@ -32,11 +32,11 @@ export default {
   },
   methods: {
     ...mapMutations({
-      resetschema: 'modules/form/setSchemaLoaded'
+      resetschema: "modules/form/setSchemaLoaded"
     }),
     ...mapActions({
-      getSchemaVuex: 'modules/form/getSchema',
-      getModelVuex: 'modules/form/getModel'
+      getSchemaVuex: "modules/form/getSchema",
+      getModelVuex: "modules/form/getModel"
     })
   }
 }

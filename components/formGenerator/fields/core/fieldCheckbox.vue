@@ -3,15 +3,15 @@
 </template>
 
 <script>
-import abstractField from '../abstractField'
+import abstractField from "../abstractField"
 
 export default {
-  mixins: [ abstractField ]
+  mixins: [abstractField]
 }
 </script>
 
 <style lang="scss">
-  .vue-form-generator .field-checkbox input {
-    margin-left: 12px;
-  }
+.vue-form-generator .field-checkbox input {
+  margin-left: 12px;
+}
 </style>

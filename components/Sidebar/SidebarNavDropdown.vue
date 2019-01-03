@@ -1,8 +1,8 @@
 <template>
-  <nuxt-link tag="li" class="nav-item nav-dropdown" :to="url" disabled>
-    <div class="nav-link nav-dropdown-toggle" @click="handleClick"><i :class="icon"></i> {{name}}</div>
+  <nuxt-link :to="url" tag="li" class="nav-item nav-dropdown" disabled>
+    <div class="nav-link nav-dropdown-toggle" @click="handleClick"><i :class="icon"/> {{ name }}</div>
     <ul class="nav-dropdown-items">
-      <slot></slot>
+      <slot/>
     </ul>
   </nuxt-link>
 </template>
@@ -12,21 +12,21 @@ export default {
   props: {
     name: {
       type: String,
-      default: ''
+      default: ""
     },
     url: {
       type: String,
-      default: ''
+      default: ""
     },
     icon: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   methods: {
-    handleClick (e) {
+    handleClick(e) {
       e.preventDefault()
-      e.target.parentElement.classList.toggle('open')
+      e.target.parentElement.classList.toggle("open")
     }
   }
 }

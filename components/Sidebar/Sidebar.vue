@@ -3,7 +3,7 @@
     <SidebarHeader/>
     <SidebarForm/>
     <nav class="sidebar-nav">
-      <div slot="header"></div>
+      <div slot="header"/>
       <ul class="nav">
         <template v-for="(item, index) in navItems">
           <template v-if="item.title">
@@ -23,7 +23,7 @@
                   <template v-if="childL1.children">
                     <!-- Second level dropdown -->
                     <SidebarNavDropdown :key="index1" :name="childL1.name" :url="childL1.url" :icon="childL1.icon">
-                      <li class="nav-item" :key="index2" v-for="(childL2, index2) in childL1.children">
+                      <li v-for="(childL2, index2) in childL1.children" :key="index2" class="nav-item">
                         <SidebarNavLink :name="childL2.name" :url="childL2.url" :icon="childL2.icon" :badge="childL2.badge" :variant="item.variant"/>
                       </li>
                     </SidebarNavDropdown>
@@ -44,32 +44,25 @@
           </template>
         </template>
       </ul>
-      <slot></slot>
+      <slot/>
     </nav>
     <SidebarFooter/>
     <SidebarMinimizer/>
   </div>
 </template>
 <script>
-import SidebarFooter from './SidebarFooter'
-import SidebarForm from './SidebarForm'
-import SidebarHeader from './SidebarHeader'
-import SidebarMinimizer from './SidebarMinimizer'
-import SidebarNavDivider from './SidebarNavDivider'
-import SidebarNavDropdown from './SidebarNavDropdown'
-import SidebarNavLink from './SidebarNavLink'
-import SidebarNavTitle from './SidebarNavTitle'
-import SidebarNavItem from './SidebarNavItem'
-import SidebarNavLabel from './SidebarNavLabel'
+import SidebarFooter from "./SidebarFooter"
+import SidebarForm from "./SidebarForm"
+import SidebarHeader from "./SidebarHeader"
+import SidebarMinimizer from "./SidebarMinimizer"
+import SidebarNavDivider from "./SidebarNavDivider"
+import SidebarNavDropdown from "./SidebarNavDropdown"
+import SidebarNavLink from "./SidebarNavLink"
+import SidebarNavTitle from "./SidebarNavTitle"
+import SidebarNavItem from "./SidebarNavItem"
+import SidebarNavLabel from "./SidebarNavLabel"
 export default {
-  name: 'sidebar',
-  props: {
-    navItems: {
-      type: Array,
-      required: true,
-      default: () => []
-    }
-  },
+  name: "Sidebar",
   components: {
     SidebarFooter,
     SidebarForm,
@@ -82,10 +75,17 @@ export default {
     SidebarNavItem,
     SidebarNavLabel
   },
+  props: {
+    navItems: {
+      type: Array,
+      required: true,
+      default: () => []
+    }
+  },
   methods: {
-    handleClick (e) {
+    handleClick(e) {
       e.preventDefault()
-      e.target.parentElement.classList.toggle('open')
+      e.target.parentElement.classList.toggle("open")
     }
   }
 }

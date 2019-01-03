@@ -1,3 +1,3 @@
 <template>
-<div class="multipane-resizer"><slot></slot></div>
+  <div class="multipane-resizer"><slot/></div>
 </template>

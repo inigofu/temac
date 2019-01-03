@@ -2,7 +2,7 @@
   <div class="app">
     <AppHeader/>
     <div class="app-body">
-      <Sidebar :navItems="nav"/>
+      <Sidebar :nav-items="nav"/>
       <main class="main">
         <breadcrumb :list="list"/>
         <div class="container-fluid">
@@ -17,14 +17,15 @@
 
 <script>
 // import nav from '../_nav'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex"
 export default {
-  name: 'full',
-  middleware: 'authenticated',
-  head () {
+  name: "Full",
+  middleware: "authenticated",
+  head() {
     return {
       bodyAttrs: {
-        class: 'app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden'
+        class:
+          "app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden"
       }
     }
   },
@@ -33,20 +34,19 @@ export default {
       nav: state => state.modules.user.nav,
       rules: state => state.modules.user.rules
     }),
-    name () {
+    name() {
       return this.$route.name
     },
-    list () {
+    list() {
       return this.$route.matched
-    },
-    
+    }
   },
-  mounted(){
+  mounted() {
     this.$ability.update(this.rules)
   },
-  beforeDestroy: function () {
+  beforeDestroy: function() {
     // `this` points to the vm instance
-    window.localStorage.removeItem('token')
+    window.localStorage.removeItem("token")
   }
 }
 </script>

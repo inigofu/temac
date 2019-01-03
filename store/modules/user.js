@@ -1,6 +1,6 @@
-import { services } from '../api'
-import Api from '../api/services/api'
-import { setToken, unsetToken } from '~/utils/auth'
+import { services } from "../api"
+import Api from "../api/services/api"
+import { setToken, unsetToken } from "~/utils/auth"
 
 const state = () => ({
   user: null,
@@ -10,70 +10,78 @@ const state = () => ({
 })
 
 const mutations = {
-  setuser (state, user) {
+  setuser(state, user) {
     state.user = user
   },
-  settoken (state, token) {
+  settoken(state, token) {
     state.token = token
   },
-  removetoken (state) {
+  removetoken(state) {
     state.token = null
   },
-  setnav (state, nav) {
+  setnav(state, nav) {
     state.nav = nav
   },
-  setrules (state, rules) {
+  setrules(state, rules) {
     state.rules = rules
   }
 }
 const getters = {
-  isAuthenticated (state) {
+  isAuthenticated(state) {
     return !!state.user
   },
-  loggedUser (state) {
+  loggedUser(state) {
     return state.user
   }
 }
 const actions = {
-  login ({ commit, state }, credentials) {
+  login({ commit, state }, credentials) {
     return new Promise((resolve, reject) => {
-      services.user.login(credentials)
-        .then((data) => {
+      services.user
+        .login(credentials)
+        .then(data => {
           var token = data.token.token
-          commit('settoken', token)
-          commit('setuser', data.user)
-          commit('setnav', data.menues)
-          commit('setrules', data.rules)
+          commit("settoken", token)
+          commit("setuser", data.user)
+          commit("setnav", data.menues)
+          commit("setrules", data.rules)
           // Save to local storage as well
           setToken(token)
-          Api().defaults.headers.common['Authorization'] = token ? `Bearer ${token}` : ''
+          Api().defaults.headers.common["Authorization"] = token
+            ? `Bearer ${token}`
+            : ""
           resolve()
-        }).catch((error) => {
+        })
+        .catch(error => {
           reject(error)
         })
     })
   },
-  validateToken ({ commit, state }, token) {
+  validateToken({ commit, state }, token) {
     return new Promise((resolve, reject) => {
-      services.user.validateToken(token)
-        .then((data) => {
+      services.user
+        .validateToken(token)
+        .then(data => {
           if (data.token.valid) {
-            Api().defaults.headers.common['Authorization'] = token ? `Bearer ${token}` : ''
-            commit('settoken', token)
-            commit('setuser', data.user)
-            commit('setnav', data.menues)
-            commit('setrules', data.rules)
+            Api().defaults.headers.common["Authorization"] = token
+              ? `Bearer ${token}`
+              : ""
+            commit("settoken", token)
+            commit("setuser", data.user)
+            commit("setnav", data.menues)
+            commit("setrules", data.rules)
           } else {
             unsetToken()
           }
           resolve(data)
-        }).catch((error) => {          
+        })
+        .catch(error => {
           reject(error)
         })
     })
   },
-  logout ({ commit, state }) {
-    commit('settoken', null)
+  logout({ commit, state }) {
+    commit("settoken", null)
   }
 }
 export default {

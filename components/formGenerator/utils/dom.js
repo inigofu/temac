@@ -1,20 +1,18 @@
-import { isFunction } from './fns'
+import { isFunction } from "./fns"
 
-export function matchesSelectorToParentElements (el, selector, baseNode) {
+export function matchesSelectorToParentElements(el, selector, baseNode) {
   let node = el
 
   const matchesSelectorFunc = [
+    "matches",
 
-    'matches',
+    "webkitMatchesSelector",
 
-    'webkitMatchesSelector',
+    "mozMatchesSelector",
 
-    'mozMatchesSelector',
+    "msMatchesSelector",
 
-    'msMatchesSelector',
-
-    'oMatchesSelector'
-
+    "oMatchesSelector"
   ].find(func => isFunction(node[func]))
 
   if (!isFunction(node[matchesSelectorFunc])) return false

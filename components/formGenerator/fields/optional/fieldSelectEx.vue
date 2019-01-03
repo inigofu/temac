@@ -6,32 +6,66 @@
 
 <script>
 /* global $ */
-import {isObject} from 'lodash/isObject'
-import abstractField from '../abstractField'
+import isObject from "lodash/isObject"
+import abstractField from "../abstractField"
 
 export default {
-  mixins: [ abstractField ],
+  mixins: [abstractField],
 
   computed: {
-    items () {
+    items() {
       let values = this.schema.values
-      if (typeof (values) === 'function') {
+      if (typeof values === "function") {
         return values.apply(this, [this.model, this.schema])
-      } else { return values }
+      } else {
+        return values
+      }
+    }
+  },
+
+  watch: {
+    model: function() {
+      if ($.fn.selectpicker) {
+        $(this.$el).selectpicker("refresh")
+      }
+    }
+  },
+
+  mounted() {
+    this.$nextTick(function() {
+      if ($.fn.selectpicker) {
+        $(this.$el)
+          .selectpicker("destroy")
+          .selectpicker(this.schema.selectOptions)
+      } else {
+        console.warn(
+          "Bootstrap-select library is missing. Please download from https://silviomoreto.github.io/bootstrap-select/ and load the script and CSS in the HTML head section!"
+        )
+      }
+    })
+  },
+
+  beforeDestroy() {
+    if ($.fn.selectpicker) {
+      $(this.$el).selectpicker("destroy")
     }
   },
 
   methods: {
-    getItemValue (item) {
+    getItemValue(item) {
       if (isObject(item)) {
-        if (typeof this.schema['selectOptions'] !== 'undefined' && typeof this.schema['selectOptions']['value'] !== 'undefined') {
+        if (
+          typeof this.schema["selectOptions"] !== "undefined" &&
+          typeof this.schema["selectOptions"]["value"] !== "undefined"
+        ) {
           return item[this.schema.selectOptions.value]
         } else {
           // Use 'id' instead of 'value' cause of backward compatibility
-          if (typeof item['id'] !== 'undefined') {
+          if (typeof item["id"] !== "undefined") {
             return item.id
           } else {
-            var err = '`id` is not defined. If you want to use another key name, add a `value` property under `selectOptions` in the schema. https://icebob.gitbooks.io/vueformgenerator/content/fields/select.html#select-field-with-object-items'
+            var err =
+              "`id` is not defined. If you want to use another key name, add a `value` property under `selectOptions` in the schema. https://icebob.gitbooks.io/vueformgenerator/content/fields/select.html#select-field-with-object-items"
             throw err
           }
         }
@@ -40,15 +74,19 @@ export default {
       }
     },
 
-    getItemName (item) {
+    getItemName(item) {
       if (isObject(item)) {
-        if (typeof this.schema['selectOptions'] !== 'undefined' && typeof this.schema['selectOptions']['name'] !== 'undefined') {
+        if (
+          typeof this.schema["selectOptions"] !== "undefined" &&
+          typeof this.schema["selectOptions"]["name"] !== "undefined"
+        ) {
           return item[this.schema.selectOptions.name]
         } else {
-          if (typeof item['name'] !== 'undefined') {
+          if (typeof item["name"] !== "undefined") {
             return item.name
           } else {
-            var err = '`name` is not defined. If you want to use another key name, add a `name` property under `selectOptions` in the schema. https://icebob.gitbooks.io/vueformgenerator/content/fields/select.html#select-field-with-object-items'
+            var err =
+              "`name` is not defined. If you want to use another key name, add a `name` property under `selectOptions` in the schema. https://icebob.gitbooks.io/vueformgenerator/content/fields/select.html#select-field-with-object-items"
             throw err
           }
         }
@@ -56,34 +94,14 @@ export default {
         return item
       }
     }
-  },
-
-  watch: {
-    model: function () {
-      if ($.fn.selectpicker) { $(this.$el).selectpicker('refresh') }
-    }
-  },
-
-  mounted () {
-    this.$nextTick(function () {
-      if ($.fn.selectpicker) {
-        $(this.$el).selectpicker('destroy').selectpicker(this.schema.selectOptions)
-      } else {
-        console.warn('Bootstrap-select library is missing. Please download from https://silviomoreto.github.io/bootstrap-select/ and load the script and CSS in the HTML head section!')
-      }
-    })
-  },
-
-  beforeDestroy () {
-    if ($.fn.selectpicker) { $(this.$el).selectpicker('destroy') }
   }
 }
 </script>
 
 <style lang="scss">
-  .vue-form-generator .field-selectEx .bootstrap-select {
-    .dropdown-menu li.selected .text{
-      font-weight: bold;
-    }
+.vue-form-generator .field-selectEx .bootstrap-select {
+  .dropdown-menu li.selected .text {
+    font-weight: bold;
   }
+}
 </style>

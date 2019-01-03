@@ -1,33 +1,33 @@
 <template>
   <div class="wrapper">
     <template v-if="schemaLoaded && modelLoaded">
-    <customForm :propID="id" :modulename="modulename" :moduleurl="moduleurl"> </customForm>
+      <customForm :propid="id" :modulename="modulename" :moduleurl="moduleurl"/>
     </template>
   </div>
 </template>
 <script>
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions, mapState, mapMutations } from "vuex"
 
 export default {
-  name: 'roles',
-  middleware: 'pagechange',
-  data () {
+  name: "Roles",
+  middleware: "pagechange",
+  data() {
     return {
-      modulename: 'roles',
-      moduleurl: 'admin/roles'
+      modulename: "roles",
+      moduleurl: "admin/roles"
     }
   },
-  mounted () {
+  mounted() {
     this.resetschema(false)
-    this.getSchemaVuex('28ca109d-4939-4ca4-bed0-f5fd1a11bdf2')
+    this.getSchemaVuex("28ca109d-4939-4ca4-bed0-f5fd1a11bdf2")
     this.getModelVuex()
     // this.getSchema()
     // this.getData()
   },
-  computed: {    
+  computed: {
     ...mapState({
       schemaLoaded: state => state.modules.form.schemaLoaded,
-      modelLoaded (state) {
+      modelLoaded(state) {
         return state.modules[this.modulename].modelLoaded
       },
       id: state => state.modules.form.id
@@ -35,14 +35,14 @@ export default {
   },
   methods: {
     ...mapMutations({
-      resetschema: 'modules/form/setSchemaLoaded'
+      resetschema: "modules/form/setSchemaLoaded"
     }),
     ...mapActions({
-      getSchemaVuex (dispatch, payload) {
-        return dispatch('modules/form/getSchema', payload)
+      getSchemaVuex(dispatch, payload) {
+        return dispatch("modules/form/getSchema", payload)
       },
-      getModelVuex (dispatch, payload) {
-        return dispatch('modules/' + this.modulename + '/getModel', payload)
+      getModelVuex(dispatch, payload) {
+        return dispatch("modules/" + this.modulename + "/getModel", payload)
       }
     })
   }

@@ -7,24 +7,24 @@
             <b-card no-body class="p-4">
               <b-card-body>
                 <form @submit.prevent="login">
-                <h1>Login</h1>
-                <p class="text-muted">Sign In to your account</p>
-                <b-input-group class="mb-3">
-                  <b-input-group-prepend><b-input-group-text><i class="icon-user"></i></b-input-group-text></b-input-group-prepend>
-                  <input type="text" class="form-control" placeholder="Username" v-model="credentials.username">
-                </b-input-group>
-                <b-input-group class="mb-4">
-                  <b-input-group-prepend><b-input-group-text><i class="icon-lock"></i></b-input-group-text></b-input-group-prepend>
-                  <input type="password" class="form-control" placeholder="Password" v-model="credentials.password">
-                </b-input-group>
-                <b-row>
-                  <b-col cols="6">
-                    <b-button type="submit" variant="primary" class="px-4">Login</b-button>
-                  </b-col>
-                  <b-col cols="6" class="text-right">
-                    <b-button variant="link" class="px-0">Forgot password?</b-button>
-                  </b-col>
-                </b-row>
+                  <h1>Login</h1>
+                  <p class="text-muted">Sign In to your account</p>
+                  <b-input-group class="mb-3">
+                    <b-input-group-prepend><b-input-group-text><i class="icon-user"/></b-input-group-text></b-input-group-prepend>
+                    <input v-model="credentials.username" type="text" class="form-control" placeholder="Username">
+                  </b-input-group>
+                  <b-input-group class="mb-4">
+                    <b-input-group-prepend><b-input-group-text><i class="icon-lock"/></b-input-group-text></b-input-group-prepend>
+                    <input v-model="credentials.password" type="password" class="form-control" placeholder="Password">
+                  </b-input-group>
+                  <b-row>
+                    <b-col cols="6">
+                      <b-button type="submit" variant="primary" class="px-4">Login</b-button>
+                    </b-col>
+                    <b-col cols="6" class="text-right">
+                      <b-button variant="link" class="px-0">Forgot password?</b-button>
+                    </b-col>
+                  </b-row>
                 </form>
               </b-card-body>
             </b-card>
@@ -45,30 +45,31 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex"
 export default {
-  name: 'Login',
-  middleware: 'anonymous',
-  data: function () {
+  name: "Login",
+  middleware: "anonymous",
+  data: function() {
     return {
       credentials: {
-        username: '',
-        password: ''
+        username: "",
+        password: ""
       },
-      error: ''
+      error: ""
     }
   },
   methods: {
     ...mapActions({
-      loginVuex (dispatch, payload) {
-        return dispatch('modules/user/login', payload)
+      loginVuex(dispatch, payload) {
+        return dispatch("modules/user/login", payload)
       }
     }),
-    login: function () {
+    login: function() {
       this.loginVuex(this.credentials)
-        .then((data) => {
-          this.$router.push('/')
-        }).catch((error) => {
+        .then(data => {
+          this.$router.push("/")
+        })
+        .catch(error => {
           console.log(error.response)
         })
     }

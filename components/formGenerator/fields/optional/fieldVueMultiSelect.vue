@@ -43,25 +43,29 @@
   )
 </template>
 <script>
-import abstractField from '../abstractField'
+import abstractField from "../abstractField"
 
 export default {
   mixins: [abstractField],
   computed: {
-    selectOptions () {
+    selectOptions() {
       return this.schema.selectOptions || {}
     },
 
-    options () {
+    options() {
       let values = this.schema.values
-      if (typeof (values) === 'function') {
+      if (typeof values === "function") {
         return values.apply(this, [this.model, this.schema])
       } else {
         return values
       }
     },
-    customLabel () {
-      if (typeof this.schema.selectOptions !== 'undefined' && typeof this.schema.selectOptions.customLabel !== 'undefined' && typeof this.schema.selectOptions.customLabel === 'function') {
+    customLabel() {
+      if (
+        typeof this.schema.selectOptions !== "undefined" &&
+        typeof this.schema.selectOptions.customLabel !== "undefined" &&
+        typeof this.schema.selectOptions.customLabel === "function"
+      ) {
         return this.schema.selectOptions.customLabel
       } else {
         // this will let the multiselect library use the default behavior if customLabel is not specified
@@ -69,39 +73,41 @@ export default {
       }
     }
   },
+  created() {
+    // Check if the component is loaded globally
+    if (!this.$root.$options.components["multiselect"]) {
+      console.error(
+        "'vue-multiselect' is missing. Please download from https://github.com/monterail/vue-multiselect and register the component globally!"
+      )
+    }
+  },
   methods: {
-    updateSelected (value/*, id */) {
+    updateSelected(value /*, id */) {
       this.value = value
     },
-    addTag (newTag, id) {
+    addTag(newTag, id) {
       let onNewTag = this.selectOptions.onNewTag
-      if (typeof (onNewTag) === 'function') {
+      if (typeof onNewTag === "function") {
         onNewTag(newTag, id, this.options, this.value)
       }
     },
-    onSearchChange (searchQuery, id) {
+    onSearchChange(searchQuery, id) {
       let onSearch = this.selectOptions.onSearch
-      if (typeof (onSearch) === 'function') {
+      if (typeof onSearch === "function") {
         onSearch(searchQuery, id, this.options)
       }
     },
-    onSelect (/* selectedOption, id */) {
+    onSelect(/* selectedOption, id */) {
       // console.log("onSelect", selectedOption, id);
     },
-    onRemove (/* removedOption, id */) {
+    onRemove(/* removedOption, id */) {
       // console.log("onRemove", removedOption, id);
     },
-    onOpen (/* id */) {
+    onOpen(/* id */) {
       // console.log("onOpen", id);
     },
-    onClose (/* value, id */) {
+    onClose(/* value, id */) {
       // console.log("onClose", value, id);
-    }
-  },
-  created () {
-    // Check if the component is loaded globally
-    if (!this.$root.$options.components['multiselect']) {
-      console.error("'vue-multiselect' is missing. Please download from https://github.com/monterail/vue-multiselect and register the component globally!")
     }
   }
 }

@@ -1,13 +1,12 @@
-import { get as objGet } from 'lodash/get'
-import { forEach } from 'lodash/forEach'
-import { isFunction } from 'lodash/isFunction'
-import { isString } from 'lodash/isString'
-import { isArray } from 'lodash/isArray'
-import { debounce } from 'lodash/debounce'
-import validators from '../utils/validators'
-import { slugifyFormID } from '../utils/schema'
+import * as objGet from "lodash/get"
+import isFunction from "lodash/isFunction"
+import isString from "lodash/isString"
+import isArray from "lodash/isArray"
+import debounce from "lodash/debounce"
+import validators from "../utils/validators"
+import { slugifyFormID } from "../utils/schema"
 
-function convertValidator (validator) {
+function convertValidator(validator) {
   if (isString(validator)) {
     if (validators[validator] != null) {
       return validators[validator]
@@ -20,14 +19,9 @@ function convertValidator (validator) {
 }
 
 export default {
-  props: [
-    'model',
-    'schema',
-    'formOptions',
-    'disabled'
-  ],
+  props: ["model", "schema", "formOptions", "disabled"],
 
-  data () {
+  data() {
     return {
       errors: [],
       debouncedValidateFunc: null,
@@ -38,7 +32,7 @@ export default {
   computed: {
     value: {
       cache: false,
-      get () {
+      get() {
         let val
         if (isFunction(this.schema.get)) {
           val = this.schema.get(this.model)
@@ -48,7 +42,7 @@ export default {
         return this.formatValueToField(val)
       },
 
-      set (newValue) {
+      set(newValue) {
         let oldValue = this.value
         newValue = this.formatValueToModel(newValue)
         if (isFunction(newValue)) {
@@ -61,33 +55,37 @@ export default {
   },
 
   methods: {
-    validate (calledParent) {
+    validate(calledParent) {
       this.clearValidationErrors()
-      let validateAsync = objGet(this.formOptions, 'validateAsync', false)
+      let validateAsync = objGet(this.formOptions, "validateAsync", false)
 
       let results = []
 
-      if (this.schema.validator && this.schema.readonly !== true && this.disabled !== true) {
+      if (
+        this.schema.validator &&
+        this.schema.readonly !== true &&
+        this.disabled !== true
+      ) {
         let validators = []
         if (!isArray(this.schema.validator)) {
           validators.push(convertValidator(this.schema.validator).bind(this))
         } else if (this.schema.validator[0] !== undefined) {
-          forEach(this.schema.validator, (validator) => {
+          this.schema.validator.forEach(validator => {
             validators.push(convertValidator(validator).bind(this))
           })
         }
-        forEach(validators, (validator) => {
+        validators.forEach(validator => {
           if (validateAsync) {
             results.push(validator(this.value, this.schema, this.model))
           } else {
             let result = validator(this.value, this.schema, this.model)
             if (result && isFunction(result.then)) {
-              result.then((err) => {
+              result.then(err => {
                 if (err) {
                   this.errors = this.errors.concat(err)
                 }
                 let isValid = this.errors.length === 0
-                this.$emit('validated', isValid, this.errors, this)
+                this.$emit("validated", isValid, this.errors, this)
               })
             } else if (result) {
               results = results.concat(result)
@@ -96,9 +94,9 @@ export default {
         })
       }
 
-      let handleErrors = (errors) => {
+      let handleErrors = errors => {
         let fieldErrors = []
-        forEach(errors, (err) => {
+        errors.forEach(err => {
           if (isArray(err) && err.length > 0) {
             fieldErrors = fieldErrors.concat(err)
           } else if (isString(err)) {
@@ -106,12 +104,17 @@ export default {
           }
         })
         if (isFunction(this.schema.onValidated)) {
-          this.schema.onValidated.call(this, this.model, fieldErrors, this.schema)
+          this.schema.onValidated.call(
+            this,
+            this.model,
+            fieldErrors,
+            this.schema
+          )
         }
 
         let isValid = fieldErrors.length === 0
         if (!calledParent) {
-          this.$emit('validated', isValid, fieldErrors, this)
+          this.$emit("validated", isValid, fieldErrors, this)
         }
         this.errors = fieldErrors
         return fieldErrors
@@ -124,14 +127,17 @@ export default {
       return Promise.all(results).then(handleErrors)
     },
 
-    debouncedValidate () {
+    debouncedValidate() {
       if (!isFunction(this.debouncedValidateFunc)) {
-        this.debouncedValidateFunc = debounce(this.validate.bind(this), objGet(this, '$parent.options.validateDebounceTime', 500))
+        this.debouncedValidateFunc = debounce(
+          this.validate.bind(this),
+          objGet(this, "$parent.options.validateDebounceTime", 500)
+        )
       }
       this.debouncedValidateFunc()
     },
 
-    updateModelValue (newValue, oldValue) {
+    updateModelValue(newValue, oldValue) {
       let changed = false
       if (isFunction(this.schema.set)) {
         this.schema.set(this.model, newValue)
@@ -142,13 +148,22 @@ export default {
       }
 
       if (changed) {
-        this.$emit('model-updated', newValue, this.schema.model)
+        this.$emit("model-updated", newValue, this.schema.model)
 
         if (isFunction(this.schema.onChanged)) {
-          this.schema.onChanged.call(this, this.model, newValue, oldValue, this.schema)
+          this.schema.onChanged.call(
+            this,
+            this.model,
+            newValue,
+            oldValue,
+            this.schema
+          )
         }
 
-        if (this.$parent.options && this.$parent.options.validateAfterChanged === true) {
+        if (
+          this.$parent.options &&
+          this.$parent.options.validateAfterChanged === true
+        ) {
           if (this.$parent.options.validateDebounceTime > 0) {
             this.debouncedValidate()
           } else {
@@ -158,19 +173,19 @@ export default {
       }
     },
 
-    clearValidationErrors () {
+    clearValidationErrors() {
       this.errors.splice(0)
     },
 
-    setModelValueByPath (path, value) {
+    setModelValueByPath(path, value) {
       // convert array indexes to properties
-      let s = path.replace(/\[(\w+)\]/g, '.$1')
+      let s = path.replace(/\[(\w+)\]/g, ".$1")
 
       // strip a leading dot
-      s = s.replace(/^\./, '')
+      s = s.replace(/^\./, "")
 
       let o = this.model
-      const a = s.split('.')
+      const a = s.split(".")
       let i = 0
       const n = a.length
       while (i < n) {
@@ -194,20 +209,23 @@ export default {
       }
     },
 
-    getFieldID (schema) {
-      const idPrefix = this.formOptions && this.formOptions.fieldIdPrefix ? this.formOptions.fieldIdPrefix : ''
+    getFieldID(schema) {
+      const idPrefix =
+        this.formOptions && this.formOptions.fieldIdPrefix
+          ? this.formOptions.fieldIdPrefix
+          : ""
       return slugifyFormID(schema, idPrefix)
     },
 
-    getFieldClasses () {
+    getFieldClasses() {
       return this.schema.fieldClasses || []
     },
 
-    formatValueToField (value) {
+    formatValueToField(value) {
       return value
     },
 
-    formatValueToModel (value) {
+    formatValueToModel(value) {
       return value
     }
   }

@@ -7,31 +7,36 @@
 </template>
 
 <script>
-import abstractField from '../abstractField'
+import abstractField from "../abstractField"
 
 export default {
-  mixins: [ abstractField ],
+  mixins: [abstractField],
 
   computed: {
-    previewStyle () {
+    previewStyle() {
       if (this.schema.preview !== false) {
         return {
-          display: 'block',
-          'background-image': this.value != null ? 'url(' + this.value + ')' : 'none'
+          display: "block",
+          "background-image":
+            this.value != null ? "url(" + this.value + ")" : "none"
         }
       } else {
         return {
-          display: 'none'
+          display: "none"
         }
       }
     },
 
     wrappedValue: {
-      get () {
-        if (this.value && this.value.indexOf('data') === 0) { return '<inline base64 image>' } else { return this.value }
+      get() {
+        if (this.value && this.value.indexOf("data") === 0) {
+          return "<inline base64 image>"
+        } else {
+          return this.value
+        }
       },
-      set (newValue) {
-        if (newValue && newValue.indexOf('http') === 0) {
+      set(newValue) {
+        if (newValue && newValue.indexOf("http") === 0) {
           this.value = newValue
         }
       }
@@ -39,19 +44,19 @@ export default {
   },
 
   watch: {
-    model () {
-      this.$el.querySelector('input.file').value = ''
+    model() {
+      this.$el.querySelector("input.file").value = ""
     }
   },
 
   methods: {
-    remove () {
-      this.value = ''
+    remove() {
+      this.value = ""
     },
 
-    fileChanged (event) {
+    fileChanged(event) {
       let reader = new FileReader()
-      reader.onload = (e) => {
+      reader.onload = e => {
         this.value = e.target.result
       }
 
@@ -64,41 +69,39 @@ export default {
 </script>
 
 <style lang="scss">
+.vue-form-generator .field-image {
+  .wrapper {
+    width: 100%;
+  }
 
-  .vue-form-generator .field-image {
+  .preview {
+    position: relative;
+    margin-top: 5px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 
-    .wrapper {
-      width: 100%;
-    }
+    .remove {
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAXUlEQVR42u2SwQoAIAhD88vVLy8KBlaS0i1oJwP3piGVg0Skmpq8HjqZrWl9uwCbGAmwKYGZs/6iqgMyAdJuM8W2QmYKpLt/0AG9ASCv/oAnANd3AEjmAlFT1BypAV+PnRH5YehvAAAAAElFTkSuQmCC");
+      width: 16px;
+      height: 16px;
 
-    .preview {
-      position: relative;
-      margin-top: 5px;
-      height: 100px;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center center;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+      font-size: 1.2em;
 
-      .remove {
-        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAXUlEQVR42u2SwQoAIAhD88vVLy8KBlaS0i1oJwP3piGVg0Skmpq8HjqZrWl9uwCbGAmwKYGZs/6iqgMyAdJuM8W2QmYKpLt/0AG9ASCv/oAnANd3AEjmAlFT1BypAV+PnRH5YehvAAAAAElFTkSuQmCC');
-        width: 16px;
-        height: 16px;
+      position: absolute;
+      right: 0.2em;
+      bottom: 0.2em;
+      opacity: 0.7;
 
-        font-size: 1.2em;
-
-        position: absolute;
-        right: 0.2em;
-        bottom: 0.2em;
-        opacity: 0.7;
-
-        &:hover {
-          opacity: 1.0;
-          cursor: pointer;
-        }
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
       }
     }
   }
+}
 </style>

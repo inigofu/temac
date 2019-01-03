@@ -1,2 +1,2 @@
-import SERVICES from './services'
+import SERVICES from "./services"
 export const services = SERVICES

@@ -1,10 +1,9 @@
 <template>
-  <div></div>
+  <div/>
   <!-- <div class="sidebar-footer"></div> -->
 </template>
 <script>
-
 export default {
-  name: 'sidebar-footer'
+  name: "SidebarFooter"
 }
 </script>

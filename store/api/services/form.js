@@ -1,9 +1,9 @@
-import JSONfn from 'json-fn'
-import Api from './api'
-import { validators } from './validators.js'
+import JSONfn from "json-fn"
+import Api from "./api"
+import { validators } from "./validators.js"
 
-function dataChek (key, value) {
-  if (key === 'validator') {
+function dataChek(key, value) {
+  if (key === "validator") {
     if (value !== null) {
       return validators[value]
     } else {
@@ -14,126 +14,173 @@ function dataChek (key, value) {
 }
 
 export default {
-  getSchema (formid, token) {
+  getSchema(formid, token) {
     return new Promise((resolve, reject) => {
-      Api().post('/rpc', {
-        request: {
-          id: formid
-        },
-        service: 'shippy.auth',
-        method: 'Auth.GetForm'
-      }, {
-        headers: {
-            'Authorization': token ? `Bearer ${token}` : '',
-        }})
+      Api()
+        .post(
+          "/rpc",
+          {
+            request: {
+              id: formid
+            },
+            service: "temac.auth",
+            method: "Auth.GetForm"
+          },
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : ""
+            }
+          }
+        )
         .then(({ data }) => {
           let response = JSON.parse(JSONfn.stringify(data.form), dataChek)
           resolve(response)
         })
-        .catch((error) => {
+        .catch(error => {
           reject(error)
         })
     })
   },
-  getModel (token) {
+  getModel(token) {
     return new Promise((resolve, reject) => {
-      Api().post('/rpc', {
-        request: {
-        },
-        service: 'shippy.auth',
-        method: 'Auth.GetAllForms'
-      }, {
-        headers: {
-            'Authorization': token ? `Bearer ${token}` : '',
-        }})
+      Api()
+        .post(
+          "/rpc",
+          {
+            request: {},
+            service: "temac.auth",
+            method: "Auth.GetAllForms"
+          },
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : ""
+            }
+          }
+        )
         .then(({ data }) => {
           resolve(data.forms)
-        }).catch((error) => {
+        })
+        .catch(error => {
           reject(error)
         })
     })
   },
-  saveModel (model, token) {
+  saveModel(model, token) {
     return new Promise((resolve, reject) => {
-      Api().post('/rpc', {
-        request: model,
-        service: 'shippy.auth',
-        method: 'Auth.UpdateForm'
-      },{
-        headers: {
-            'Authorization': token ? `Bearer ${token}` : '',
-        }})
+      Api()
+        .post(
+          "/rpc",
+          {
+            request: model,
+            service: "temac.auth",
+            method: "Auth.UpdateForm"
+          },
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : ""
+            }
+          }
+        )
         .then(({ data }) => {
           resolve(data)
-        }).catch((error) => {
+        })
+        .catch(error => {
           reject(error)
         })
     })
   },
-  addModel (model, token) {
+  addModel(model, token) {
     return new Promise((resolve, reject) => {
-      Api().post('/rpc', {
-        request: model,
-        service: 'shippy.auth',
-        method: 'Auth.UpdateForm'
-      }, {
-        headers: {
-            'Authorization': token ? `Bearer ${token}` : '',
-        }})
+      Api()
+        .post(
+          "/rpc",
+          {
+            request: model,
+            service: "temac.auth",
+            method: "Auth.UpdateForm"
+          },
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : ""
+            }
+          }
+        )
         .then(({ data }) => {
           resolve(data)
-        }).catch((error) => {
+        })
+        .catch(error => {
           reject(error)
         })
     })
   },
-  deleteModel (model, token) {
+  deleteModel(model, token) {
     return new Promise((resolve, reject) => {
-      Api().post('/rpc', {
-        request: model,
-        service: 'shippy.auth',
-        method: 'Auth.DeleteForm'
-      }, {
-        headers: {
-            'Authorization': token ? `Bearer ${token}` : '',
-        }})
+      Api()
+        .post(
+          "/rpc",
+          {
+            request: model,
+            service: "temac.auth",
+            method: "Auth.DeleteForm"
+          },
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : ""
+            }
+          }
+        )
         .then(({ data }) => {
           resolve(data)
-        }).catch((error) => {
+        })
+        .catch(error => {
           reject(error)
         })
     })
   },
-  deleteField (model, token) {
+  deleteField(model, token) {
     return new Promise((resolve, reject) => {
-      Api().post('/rpc', {
-        request: model,
-        service: 'shippy.auth',
-        method: 'Auth.DeleteFields'
-      }, {
-        headers: {
-            'Authorization': token ? `Bearer ${token}` : '',
-        }})
+      Api()
+        .post(
+          "/rpc",
+          {
+            request: model,
+            service: "temac.auth",
+            method: "Auth.DeleteFields"
+          },
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : ""
+            }
+          }
+        )
         .then(({ data }) => {
           resolve(data)
-        }).catch((error) => {
+        })
+        .catch(error => {
           reject(error)
         })
     })
   },
-  deleteTab (model, token) {
+  deleteTab(model, token) {
     return new Promise((resolve, reject) => {
-      Api().post('/rpc', {
-        request: model,
-        service: 'shippy.auth',
-        method: 'Auth.DeleteTabs'
-      }, {
-        headers: {
-            'Authorization': token ? `Bearer ${token}` : '',
-        }})
+      Api()
+        .post(
+          "/rpc",
+          {
+            request: model,
+            service: "temac.auth",
+            method: "Auth.DeleteTabs"
+          },
+          {
+            headers: {
+              Authorization: token ? `Bearer ${token}` : ""
+            }
+          }
+        )
         .then(({ data }) => {
           resolve(data)
-        }).catch((error) => {
+        })
+        .catch(error => {
           reject(error)
         })
     })

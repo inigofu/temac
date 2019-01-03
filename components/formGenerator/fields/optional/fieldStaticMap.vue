@@ -3,19 +3,19 @@
 </template>
 
 <script>
-import abstractField from '../abstractField'
-import { defaults } from 'lodash/defaults'
+import abstractField from "../abstractField"
+import defaults from "lodash/defaults"
 
 export default {
-  mixins: [ abstractField ],
+  mixins: [abstractField],
 
   computed: {
-    mapLink () {
+    mapLink() {
       if (this.value) {
         let lat, lng
         let options = defaults(this.schema.staticMapOptions || {}, {
-          lat: 'lat',
-          lng: 'lng',
+          lat: "lat",
+          lng: "lng",
           zoom: 8,
           sizeX: 640,
           sizeY: 640
@@ -24,15 +24,31 @@ export default {
         lat = this.value[options.lat]
         lng = this.value[options.lng]
 
-        let url = `http://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=${options.zoom}&size=${options.sizeX}x${options.sizeY}`
+        let url = `http://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=${
+          options.zoom
+        }&size=${options.sizeX}x${options.sizeY}`
 
-        let props = ['scale', 'format', 'maptype', 'language', 'region', 'markers', 'path', 'visible', 'style', 'key', 'signature']
+        let props = [
+          "scale",
+          "format",
+          "maptype",
+          "language",
+          "region",
+          "markers",
+          "path",
+          "visible",
+          "style",
+          "key",
+          "signature"
+        ]
         for (let prop of props) {
-          if (typeof options[prop] !== 'undefined') {
+          if (typeof options[prop] !== "undefined") {
             url += `&${prop}=${options[prop]}`
           }
         }
-        if (lat && lng) { return url }
+        if (lat && lng) {
+          return url
+        }
       }
     }
   }
@@ -40,9 +56,9 @@ export default {
 </script>
 
 <style lang="scss">
-  .vue-form-generator .field-staticMap img {
-    display: block;
-    width: auto;
-    max-width: 100%;
-  }
+.vue-form-generator .field-staticMap img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+}
 </style>

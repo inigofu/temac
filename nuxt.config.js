@@ -1,70 +1,69 @@
-const PurgecssPlugin = require('purgecss-webpack-plugin')
-const webpack = require('webpack');
-const glob = require('glob-all')
-const path = require('path')
+const PurgecssPlugin = require("purgecss-webpack-plugin")
+const webpack = require("webpack")
+const glob = require("glob-all")
+const path = require("path")
 const CompressionPlugin = require("compression-webpack-plugin")
 
 module.exports = {
   render: {
-    gzip: { threshold: 6 }
+    gzip: { threshold: 6 },
+    push: true
   },
   /*
   ** Headers of the page
   */
   head: {
-    title: 'temac',
+    title: "temac",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'temac' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "temac" }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: { color: "#3B8070" },
+  css: [
+    "~/node_modules/simple-line-icons/scss/simple-line-icons.scss",
+    "~/assets/scss/style.scss"
+  ],
   /*
   ** plugins
   */
-  plugins: [
-    '~/plugins/components',
-    '~/plugins/casl'
-  ],
+  plugins: ["~/plugins/components", "~/plugins/casl"],
   /*
   ** modules
   */
-  modules: [
-    '@nuxtjs/pwa'
-  ],
+  modules: ["@nuxtjs/pwa", 'bootstrap-vue/nuxt'],
   /*
   ** Build configuration
   */
-  
+
   build: {
     render: {
       gzip: {
-      threshold: -1
+        threshold: -1
       }
-      },
-      
-      
-   analyze: { 
-    analyzerMode: 'static'
+    },
+    analyze: {
+      analyzerMode: "static"
     },
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
+        /*config.module.rules.push({
+          enforce: "pre",
           test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
+          loader: "eslint-loader",
           exclude: /(node_modules)/
         })
+        config.plugins.push(
+          new webpack.LoaderOptionsPlugin({ options: {} })
+        )*/
       }
       if (!isDev) {
         // Remove unused CSS using purgecss. See https://github.com/FullHuman/purgecss
@@ -72,23 +71,31 @@ module.exports = {
         config.plugins.push(
           new PurgecssPlugin({
             paths: glob.sync([
-              path.join(__dirname, './pages/**/*.vue'),
-              path.join(__dirname, './layouts/**/*.vue'),
-              path.join(__dirname, './components/**/*.vue')
+              path.join(__dirname, "./pages/**/*.vue"),
+              path.join(__dirname, "./layouts/**/*.vue"),
+              path.join(__dirname, "./components/**/*.vue")
             ]),
-            whitelist: ['html', 'body']
+            whitelist: ["html", "body"]
           }),
           new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-          new CompressionPlugin({ test: /\.js/})
-        )          
+          new CompressionPlugin({ test: /\.js/ }),
+          new webpack.DefinePlugin({
+            // <-- key to reducing React's size
+            "process.env": {
+              NODE_ENV: JSON.stringify("production")
+            }
+          })
+          //new webpack.optimize.UglifyJsPlugin(), //minify everything
+          //new webpack.optimize.AggressiveMergingPlugin()//Merge chunks
+        )
       }
     },
-    vendor: ['@casl/vue']
+    vendor: ["@casl/vue"]
   },
-   /*
+  /*
   ** Router configuration
   */
   router: {
-    middleware: 'check-auth'
-  },
+    middleware: "check-auth"
+  }
 }
