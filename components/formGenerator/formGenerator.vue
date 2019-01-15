@@ -2,7 +2,7 @@
 div.vue-form-generator(v-if='schema != null')
   fieldset(v-if="schema.fields", :is='tag')
     template(v-for='field in fields')
-      .form-group.col(v-if='fieldVisible(field)', :class='getFieldRowClasses(field)'  @contextmenu.prevent="$refs.menu1.open($event, { name: field.id})")
+      .form-group.col(v-if='fieldVisible(field)', :class='getFieldRowClasses(field)'  @contextmenu.prevent="$refs.menu1.open($event, { name: field.idcode})")
         label(v-if="fieldTypeHasLabel(field)", :for="getFieldID(field)", :class="field.labelClasses")
           | {{ field.label }}
           span.help(v-if='field.help')

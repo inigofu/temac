@@ -14,14 +14,14 @@ function dataChek(key, value) {
 }
 
 export default {
-  getSchema(formid, token) {
+  getSchema(name, token) {
     return new Promise((resolve, reject) => {
       Api()
         .post(
           "/rpc",
           {
             request: {
-              id: formid
+              name: name
             },
             service: "temac.auth",
             method: "Auth.GetForm"

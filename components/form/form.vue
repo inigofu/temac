@@ -30,7 +30,7 @@
         </div>
         <div>
           <b-tabs >
-            <b-tab v-for="(tab,index) in schematabs" :key="tab.tabs.id" :title= "tab.tabs.name">
+            <b-tab v-for="(tab,index) in schematabs" :key="tab.tabs.idcode" :title= "tab.tabs.name">
               <div class="control-buttons text-center">
                 <b-button v-if="tab.tabs.multiline" class="btn btn-default new" @click="newLine(tab.tabs.name, index)"> <i class="fa fa-plus"/>New line</b-button>
               </div>
@@ -192,7 +192,7 @@ export default {
         }
       } else {
         var row = this.rows.filter(p => {
-          return p.id === newId
+          return p.idcode === newId
         })
         this.isNewModel = false
         this.model = cloneDeep(row[0])
@@ -243,7 +243,7 @@ export default {
       this.isNewModel = false
       this.rowSelected = true
       this.changed = false
-      this.$router.push("/" + this.moduleurl + "/" + record.id + "?")
+      this.$router.push("/" + this.moduleurl + "/" + record.idcode + "?")
     },
     onValidated(name, res, errors) {
       this.errors = this.errors.filter(function(el) {
@@ -267,7 +267,7 @@ export default {
     },
     newLine(tabid, tabindex) {
       let newRow = this.createDefaultObject(this.schema.tabs[tabindex], {
-        id: "1"
+        idcode: "1"
       })
       if (this.model[tabid] === undefined || this.model[tabid] === null) {
         Vue.set(this.model, tabid, [newRow])
@@ -296,7 +296,7 @@ export default {
     deleteModel() {
       this.deleteModelVuex(this.model)
         .then(response => {
-          this.$router.push("/" + this.moduleurl + "/" + this.rows[response].id)
+          this.$router.push("/" + this.moduleurl + "/" + this.rows[response].idcode)
         })
         .catch(response => {
           // fail

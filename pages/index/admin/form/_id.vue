@@ -20,7 +20,7 @@ export default {
 
   mounted() {
     this.resetschema(false)
-    this.getSchemaVuex("16acdb72-2c23-488e-92c1-66a083eb81ac")
+    this.getSchemaVuex(this.modulename)
     this.getModelVuex()
   },
   computed: {

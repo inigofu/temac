@@ -160,7 +160,7 @@ export default {
     },
     deleteLine(row) {
       let deletemodel = {
-        id: this.parentid
+        idcode: this.parentid
       }
       deletemodel[this.name] = [row]
       this.deleteLineVuex(deletemodel)
