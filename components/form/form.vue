@@ -180,6 +180,7 @@ export default {
   },
   watch: {
     id: function(newId, oldId) {
+      console.log('filtering',newId)
       if (newId === "new") {
         let newRow = this.createDefaultObject(this.schema)
         this.isNewModel = true
@@ -191,9 +192,11 @@ export default {
           el.focus()
         }
       } else {
+        console.log('beforefilter',this.rows,'newId',newId)
         var row = this.rows.filter(p => {
           return p.idcode === newId
         })
+        console.log('afterfilter',row,'newId',newId)
         this.isNewModel = false
         this.model = cloneDeep(row[0])
       }

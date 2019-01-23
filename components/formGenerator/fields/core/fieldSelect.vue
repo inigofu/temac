@@ -131,8 +131,8 @@ export default {
         ) {
           return item[this.schema.selectOptions.name]
         } else {
-          if (typeof item["value"] !== "undefined") {
-            return item.value
+          if (typeof item["name"] !== "undefined") {
+            return item.name
           } else {
             var err =
               "`name` is not defined. If you want to use another key name, add a `name` property under `selectOptions` in the schema. https://icebob.gitbooks.io/vueformgenerator/content/fields/select.html#select-field-with-object-items"

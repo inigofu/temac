@@ -19,7 +19,7 @@ export default {
   },
   mounted() {
     this.resetschema(false)
-    this.getSchemaVuex("a98c0acd-ff66-482a-a8be-3f9be3c92e88")
+    this.getSchemaVuex("users")
     this.getModelVuex()
     // this.getSchema()
     // this.getData()

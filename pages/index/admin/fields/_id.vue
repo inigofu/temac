@@ -9,7 +9,7 @@
 import { mapActions, mapState, mapMutations } from "vuex"
 
 export default {
-  name: "Fields",
+  name: "Roles",
   middleware: "pagechange",
   data() {
     return {
@@ -17,14 +17,10 @@ export default {
       moduleurl: "admin/fields"
     }
   },
-  async fetch({ store, params }) {
-    console.log("fields fecth")
-    store.commit("modules/form/setSchemaLoaded", false)
-    store.dispatch(
-      "modules/form/getSchema",
-      "2c202af7-9404-447c-b38c-04fabeacdcfc"
-    )
-    store.dispatch("modules/fields/getModel")
+  mounted() {
+    this.resetschema(false)
+    this.getSchemaVuex("fields")
+    this.getModelVuex()
     // this.getSchema()
     // this.getData()
   },

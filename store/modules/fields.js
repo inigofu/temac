@@ -2,7 +2,7 @@ import { services } from "../api"
 import clone from "lodash/clone"
 
 const state = () => ({
-  fields: ["id", "label", "model"],
+  fields: ["idcode", "label", "model"],
   rows: Array,
   modelLoaded: false
 })
