@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <multipane v-resize="onResize" class="custom-resizer" layout="vertical" @paneResize="paneResizeStop">
+    <multipane class="custom-resizer" layout="vertical" @paneResize="paneResizeStop">
       <div :class="[model ? 'd-none d-lg-block' : '' ,'']" :style="{minWidth: '20%' , width: panWidth}">
         <b-form-group horizontal label="Filter" class="mb-0">
           <b-input-group>
@@ -66,7 +66,7 @@ import cloneDeep from "lodash/cloneDeep"
 import isObject from "lodash/isObject"
 import FieldAwesome from "./fieldAwesome.vue"
 import Multiselect from "vue-multiselect"
-import resize from "vue-resize-directive"
+//import resize from "vue-resize-directive"
 
 Vue.component("multiselect", Multiselect)
 
@@ -85,7 +85,7 @@ export default {
     gridcarrusel
   },
   directives: {
-    resize
+    //resize
   },
   filters: filters,
   props: [

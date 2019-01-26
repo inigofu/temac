@@ -1,12 +1,11 @@
-const PurgecssPlugin = require("purgecss-webpack-plugin")
-const webpack = require("webpack")
-const glob = require("glob-all")
-const path = require("path")
-const CompressionPlugin = require("compression-webpack-plugin")
-
+//const PurgecssPlugin = require("purgecss-webpack-plugin")
+//const webpack = require("webpack")
+//const glob = require("glob-all")
+//const path = require("path")
 module.exports = {
+  mode: 'spa',
   render: {
-    gzip: { threshold: 6 },
+    compressor: { threshold: 6 },
     push: true
   },
   /*
@@ -26,7 +25,6 @@ module.exports = {
   */
   loading: { color: "#3B8070" },
   css: [
-    "~/node_modules/simple-line-icons/scss/simple-line-icons.scss",
     "~/assets/scss/style.scss"
   ],
   /*
@@ -68,29 +66,28 @@ module.exports = {
       if (!isDev) {
         // Remove unused CSS using purgecss. See https://github.com/FullHuman/purgecss
         // for more information about purgecss.
-        config.plugins.push(
-          new PurgecssPlugin({
-            paths: glob.sync([
-              path.join(__dirname, "./pages/**/*.vue"),
-              path.join(__dirname, "./layouts/**/*.vue"),
-              path.join(__dirname, "./components/**/*.vue")
-            ]),
-            whitelist: ["html", "body"]
-          }),
-          new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-          new CompressionPlugin({ test: /\.js/ }),
-          new webpack.DefinePlugin({
-            // <-- key to reducing React's size
-            "process.env": {
-              NODE_ENV: JSON.stringify("production")
-            }
-          })
+        //config.plugins.push(
+       //   new PurgecssPlugin({
+        //    paths: glob.sync([
+        //      path.join(__dirname, "./pages/**/*.vue"),
+        //      path.join(__dirname, "./layouts/**/*.vue"),
+        //      path.join(__dirname, "./components/**/*.vue")
+        //    ]),
+        //    whitelist: ["html", "body"]
+        //  }),
+        //  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        //  new webpack.DefinePlugin({
+        //    // <-- key to reducing React's size
+        //    "process.env": {
+         //     NODE_ENV: JSON.stringify("production")
+        //    }
+         // })
           //new webpack.optimize.UglifyJsPlugin(), //minify everything
           //new webpack.optimize.AggressiveMergingPlugin()//Merge chunks
-        )
+        //)
       }
-    },
-    vendor: ["@casl/vue"]
+    }//,
+    //vendor: ["@casl/vue"]
   },
   /*
   ** Router configuration
