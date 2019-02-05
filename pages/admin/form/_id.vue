@@ -7,18 +7,26 @@
 </template>
 <script>
 import { mapActions, mapState, mapMutations } from "vuex"
-
+import CustomForm from "~/components/form/form.vue"
 export default {
+  layout:"app",
   name: "Formpage",
   middleware: "pagechange",
+  components: {
+    CustomForm
+  },
   data() {
     return {
       modulename: "form",
       moduleurl: "admin/form"
     }
   },
-
+  beforeRouteLeave(to, from, next) {
+    console.log("beforeRouteLeave"+to+from)
+    next()
+  },
   mounted() {
+    console.log("form mounted")
     this.resetschema(false)
     this.getSchemaVuex(this.modulename)
     this.getModelVuex()

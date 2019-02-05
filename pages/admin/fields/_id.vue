@@ -7,22 +7,24 @@
 </template>
 <script>
 import { mapActions, mapState, mapMutations } from "vuex"
-
+import CustomForm from "~/components/form/form.vue"
 export default {
-  name: "Users",
+  layout:"app",
+  name: "Roles",
   middleware: "pagechange",
+  components: {
+    CustomForm
+  },
   data() {
     return {
-      modulename: "users",
-      moduleurl: "admin/users"
+      modulename: "fields",
+      moduleurl: "admin/fields"
     }
   },
   mounted() {
     this.resetschema(false)
-    this.getSchemaVuex("users")
+    this.getSchemaVuex("fields")
     this.getModelVuex()
-    // this.getSchema()
-    // this.getData()
   },
   computed: {
     ...mapState({

@@ -1,5 +1,4 @@
-export default async function({ store, route }) {
+export default async function({ store, route,from }) {
   // If nuxt generate, pass this middleware
-  console.log('pagechange', route.params.id)
   store.commit("modules/form/setID", route.params.id)
 }

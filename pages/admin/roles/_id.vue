@@ -7,10 +7,14 @@
 </template>
 <script>
 import { mapActions, mapState, mapMutations } from "vuex"
-
+import CustomForm from "~/components/form/form.vue"
 export default {
+  layout:"app",
   name: "Roles",
   middleware: "pagechange",
+  components: {
+    CustomForm
+  },
   data() {
     return {
       modulename: "roles",

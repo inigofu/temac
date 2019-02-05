@@ -36,10 +36,12 @@ const getters = {
 }
 const actions = {
   login({ commit, state }, credentials) {
+    console.log("login credential " + credentials)
     return new Promise((resolve, reject) => {
       services.user
         .login(credentials)
         .then(data => {
+          console.log("login data " + data)
           var token = data.token.token
           commit("settoken", token)
           commit("setuser", data.user)
@@ -53,6 +55,7 @@ const actions = {
           resolve()
         })
         .catch(error => {
+          console.log("login error " + error)
           reject(error)
         })
     })

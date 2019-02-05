@@ -10,7 +10,7 @@ export default async function({ store, req }) {
   await store
     .dispatch("modules/user/validateToken", token)
     .then(data => {
-      store.commit("modules/user/setuser", data.user)
+      console.log("auth user", data)
     })
     .catch(error => {
       throw error

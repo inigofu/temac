@@ -50,7 +50,7 @@
 
 <script>
 import Vue from "vue"
-import { mapState, mapActions } from "vuex"
+import { mapState, mapActions, mapMutations } from "vuex"
 import VueFormGenerator from "../../components/formGenerator/formGenerator.vue"
 import gridcarrusel from "../../components/formGenerator/gridCarrusel.vue"
 import VueFormGeneratorTable from "../../components/formGenerator/formGeneratorTable.vue"
@@ -76,6 +76,7 @@ Vue.component("fieldAwesome", FieldAwesome)
 // Vue.use(VueFormGenerator)
 
 export default {
+  name: "customForm",
   components: {
     DataTable,
     VueFormGenerator,
@@ -200,9 +201,15 @@ export default {
         this.isNewModel = false
         this.model = cloneDeep(row[0])
       }
+    },
+    propid: function(newId, oldId) {
+      console.log("route change")
     }
   },
   methods: {
+    ...mapMutations({
+      setID: "modules/form/setID"
+    }),
     ...mapActions({
       saveModelVuex(dispatch, payload) {
         return dispatch("modules/" + this.modulename + "/saveModel", payload)
@@ -243,10 +250,14 @@ export default {
     },
 
     selectRow(record, id) {
+      console.log("selectRow")
+      this.setID(record.idcode)
       this.isNewModel = false
       this.rowSelected = true
       this.changed = false
-      this.$router.push("/" + this.moduleurl + "/" + record.idcode + "?")
+      
+      //this.$router.push("/" + this.moduleurl + "/" + record.idcode + "?")
+      //this.$router.push({path:"/" + this.moduleurl+ "/" + record.idcode});
     },
     onValidated(name, res, errors) {
       this.errors = this.errors.filter(function(el) {
@@ -418,10 +429,17 @@ export default {
       return model
     }
   },
-
   mounted() {
     // this.rows = users.users()
-    console.log("ability", this.$ability)
+    console.log("propid", this.propid)
+    if (this.propid!==undefined) {
+      var row = this.rows.filter(p => {
+          return p.idcode === this.propid
+        })
+        console.log('afterfilter',row,'newId',this.propid)
+        this.isNewModel = false
+        this.model = cloneDeep(row[0])
+    }
     if (document.documentElement.clientWidth < 991.98) {
       this.panWidth = "100%"
     } else {

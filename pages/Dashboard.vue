@@ -538,6 +538,7 @@
 
 <script>
 export default {
+  layout:"app",
   name: "Dashboard",
 
   data: function() {

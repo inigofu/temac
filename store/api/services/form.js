@@ -33,6 +33,7 @@ export default {
           }
         )
         .then(({ data }) => {
+          console.log("stringify" + data)
           let response = JSON.parse(JSONfn.stringify(data.form), dataChek)
           resolve(response)
         })

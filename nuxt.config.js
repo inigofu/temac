@@ -1,12 +1,12 @@
-//const PurgecssPlugin = require("purgecss-webpack-plugin")
-//const webpack = require("webpack")
-//const glob = require("glob-all")
-//const path = require("path")
+import PurgecssPlugin from 'purgecss-webpack-plugin'
+import glob from 'glob-all'
+import path from 'path'
+import webpack from 'webpack'
+
 module.exports = {
-  mode: 'spa',
+  //mode: 'spa', 
   render: {
-    compressor: { threshold: 6 },
-    push: true
+    compressor: { threshold: 6 }
   },
   /*
   ** Headers of the page
@@ -30,16 +30,17 @@ module.exports = {
   /*
   ** plugins
   */
-  plugins: ["~/plugins/components", "~/plugins/casl"],
+  plugins: [ "~/plugins/casl"],
   /*
   ** modules
   */
-  modules: ["@nuxtjs/pwa", 'bootstrap-vue/nuxt'],
+  modules: [/*"@nuxtjs/pwa"*/, 'bootstrap-vue/nuxt'],
   /*
   ** Build configuration
   */
 
   build: {
+    extractCSS: true,
     render: {
       gzip: {
         threshold: -1
@@ -48,43 +49,36 @@ module.exports = {
     analyze: {
       analyzerMode: "static"
     },
+    'html.minify': {
+      collapseBooleanAttributes: true,
+      decodeEntities: true,
+      minifyCSS: true,
+      minifyJS: true,
+      processConditionalComments: true,
+      removeEmptyAttributes: true,
+      removeRedundantAttributes: true,
+      trimCustomFragments: true,
+      useShortDoctype: true
+    },
     /*
     ** Run ESLint on save
     */
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
-        /*config.module.rules.push({
-          enforce: "pre",
-          test: /\.(js|vue)$/,
-          loader: "eslint-loader",
-          exclude: /(node_modules)/
-        })
-        config.plugins.push(
-          new webpack.LoaderOptionsPlugin({ options: {} })
-        )*/
+        //config.devtool = '#source-map'
       }
       if (!isDev) {
-        // Remove unused CSS using purgecss. See https://github.com/FullHuman/purgecss
-        // for more information about purgecss.
-        //config.plugins.push(
-       //   new PurgecssPlugin({
-        //    paths: glob.sync([
-        //      path.join(__dirname, "./pages/**/*.vue"),
-        //      path.join(__dirname, "./layouts/**/*.vue"),
-        //      path.join(__dirname, "./components/**/*.vue")
-        //    ]),
-        //    whitelist: ["html", "body"]
-        //  }),
-        //  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        //  new webpack.DefinePlugin({
-        //    // <-- key to reducing React's size
-        //    "process.env": {
-         //     NODE_ENV: JSON.stringify("production")
-        //    }
-         // })
-          //new webpack.optimize.UglifyJsPlugin(), //minify everything
-          //new webpack.optimize.AggressiveMergingPlugin()//Merge chunks
-        //)
+        config.plugins.push(
+          new PurgecssPlugin({
+            paths: glob.sync([
+              path.join(__dirname, './pages/**/*.vue'),
+              path.join(__dirname, './layouts/**/*.vue'),
+              path.join(__dirname, './components/**/*.vue')
+            ]),
+            whitelist: ['html', 'body']
+          }),
+          new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+        )       
       }
     }//,
     //vendor: ["@casl/vue"]
@@ -95,4 +89,6 @@ module.exports = {
   router: {
     middleware: "check-auth"
   }
+
+  
 }

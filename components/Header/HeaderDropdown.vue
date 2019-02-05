@@ -28,9 +28,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      logoutVuex(dispatch, payload) {
-        return dispatch("/modules/user/logout", payload)
-      }
+      logoutVuex: "/modules/user/logout"
     }),
     logout: function() {
       this.logoutVuex()
