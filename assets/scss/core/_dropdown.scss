@@ -51,6 +51,34 @@
   .navbar-nav {
     .dropdown-menu {
       position: absolute;
+      flex: 1;
+      max-height: calc(100vh - #{$navbar-height});
+      height: auto;
+      overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    @include sidebar-width($sidebar-borders, $sidebar-width);
+
+    &::-webkit-scrollbar {
+      position: absolute;
+      width: 10px;
+      margin-left: -10px;
+      -webkit-appearance: none;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: lighten($navbar-bg, 5%);
+      border-right: 1px solid darken($navbar-bg, 5%);
+      border-left: 1px solid darken($navbar-bg, 5%);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 50px;
+      background-color: darken($navbar-bg, 10%);
+      background-clip: content-box;
+      border-color: transparent;
+      border-style: solid;
+      border-width: 1px 2px;
+    }
     }
     // Menu positioning
     //

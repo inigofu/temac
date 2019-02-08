@@ -51,11 +51,11 @@
 <script>
 import Vue from "vue"
 import { mapState, mapActions, mapMutations } from "vuex"
-import VueFormGenerator from "../../components/formGenerator/formGenerator.vue"
-import gridcarrusel from "../../components/formGenerator/gridCarrusel.vue"
-import VueFormGeneratorTable from "../../components/formGenerator/formGeneratorTable.vue"
+const VueFormGenerator = () => import("../../components/formGenerator/formGenerator.vue")
+const gridcarrusel = () => import("../../components/formGenerator/gridCarrusel.vue")
+const VueFormGeneratorTable = () => import("../../components/formGenerator/formGeneratorTable.vue")
 import { Multipane, MultipaneResizer } from "../../components/multipane"
-import DataTable from "./dataTable.vue"
+const DataTable = () => import("./dataTable.vue")
 import { filters } from "./utils"
 import isFunction from "lodash/isFunction"
 import isArray from "lodash/isArray"
@@ -64,8 +64,8 @@ import get from "lodash/get"
 import each from "lodash/each"
 import cloneDeep from "lodash/cloneDeep"
 import isObject from "lodash/isObject"
-import FieldAwesome from "./fieldAwesome.vue"
-import Multiselect from "vue-multiselect"
+const FieldAwesome = () => import("./fieldAwesome.vue")
+const Multiselect = () => import("vue-multiselect")
 //import resize from "vue-resize-directive"
 
 Vue.component("multiselect", Multiselect)

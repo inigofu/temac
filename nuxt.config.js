@@ -25,8 +25,23 @@ module.exports = {
   */
   loading: { color: "#3B8070" },
   css: [
-    "~/assets/scss/style.scss"
+    /* Import Font Awesome Icons Set */
+    //'~/node_modules/flag-icon-css/css/flag-icon.min.css',
+    /* Import Font Awesome Icons Set */
+    '~/node_modules/font-awesome/css/font-awesome.min.css',
+    /* Import Simple Line Icons Set */
+    '~/node_modules/simple-line-icons/css/simple-line-icons.css',
+    /* Import Bootstrap Vue Styles */
+    '~/node_modules/bootstrap-vue/dist/bootstrap-vue.css',
+    /* Import Core SCSS */
+    { src: '~/assets/scss/style.scss', lang: 'scss' }
   ],
+   /*
+  ** Style resources configuration
+  */
+ styleResources: {
+  scss: './assets/scss/style.scss'
+},
   /*
   ** plugins
   */
@@ -69,14 +84,6 @@ module.exports = {
       }
       if (!isDev) {
         config.plugins.push(
-          new PurgecssPlugin({
-            paths: glob.sync([
-              path.join(__dirname, './pages/**/*.vue'),
-              path.join(__dirname, './layouts/**/*.vue'),
-              path.join(__dirname, './components/**/*.vue')
-            ]),
-            whitelist: ['html', 'body']
-          }),
           new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         )       
       }

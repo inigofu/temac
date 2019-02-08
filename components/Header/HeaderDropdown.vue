@@ -28,13 +28,15 @@ export default {
   },
   methods: {
     ...mapActions({
-      logoutVuex: "/modules/user/logout"
+      logoutVuex(dispatch, payload) {
+        return dispatch("modules/user/logout", payload)
+      }
     }),
     logout: function() {
       this.logoutVuex()
       // Delete from local storage as well
       unsetToken()
-      this.$router.push("/pages/login")
+      this.$router.go("/pages/login")
     }
   }
 }
