@@ -1,5 +1,13 @@
-<template >
-  <b-table id="tabladatos" :stacked="stacked" :items="rows" :fields="fields" :filter="filter" hover @row-clicked="select" />
+<template>
+  <b-table
+    id="tabladatos"
+    :stacked="stacked"
+    :items="rows"
+    :fields="fields"
+    :filter="filter"
+    hover
+    @row-clicked="select"
+  />
 </template>
 
 <script>

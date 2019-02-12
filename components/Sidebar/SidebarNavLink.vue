@@ -1,14 +1,30 @@
 <template>
   <div v-if="isExternalLink">
-    <a :href="url" :class="classList">
-      <i :class="icon"/> {{ name }}
-      <b-badge v-if="badge && badge.text" :variant="badge.variant">{{ badge.text }}</b-badge>
+    <a
+      :href="url"
+      :class="classList"
+    >
+      <i :class="icon" /> {{ name }}
+      <b-badge
+        v-if="badge && badge.text"
+        :variant="badge.variant"
+      >
+        {{ badge.text }}
+      </b-badge>
     </a>
   </div>
   <div v-else>
-    <nuxt-link :to="url" :class="classList">
-      <i :class="icon"/> {{ name }}
-      <b-badge v-if="badge && badge.text" :variant="badge.variant">{{ badge.text }}</b-badge>
+    <nuxt-link
+      :to="url"
+      :class="classList"
+    >
+      <i :class="icon" /> {{ name }}
+      <b-badge
+        v-if="badge && badge.text"
+        :variant="badge.variant"
+      >
+        {{ badge.text }}
+      </b-badge>
     </nuxt-link>
   </div>
 </template>

@@ -1,39 +1,39 @@
 <template>
   <div class="app">
-    <AppHeader/>
+    <AppHeader />
     <div class="app-body">
-      <Sidebar :nav-items="nav"/>
+      <Sidebar :nav-items="nav" />
       <main class="main">
-        <breadcrumb :list="list"/>
+        <breadcrumb :list="list" />
         <div class="container-fluid">
           <no-ssr>
-          <nuxt/>
+            <nuxt />
           </no-ssr>
         </div>
       </main>
-      <AppAside/>
+      <AppAside />
     </div>
-    <AppFooter/>
+    <AppFooter />
   </div>
 </template>
 <script>
 // import nav from '../_nav'
 import AppAside from "~/components/Aside.vue"
 import Breadcrumb from "~/components/Breadcrumb.vue"
-import Callout from "~/components/Callout.vue"
+//import Callout from "~/components/Callout.vue"
 import AppFooter from "~/components/Footer.vue"
 import AppHeader from "~/components/Header/Header.vue"
 import Sidebar from "~/components/Sidebar/Sidebar.vue"
 import { mapState, mapActions } from "vuex"
 export default {
-    components: {
-        AppHeader,
-        Breadcrumb,
-        Callout,
-        Sidebar,
-        AppAside,
-        AppFooter
-    },
+  components: {
+    AppHeader,
+    Breadcrumb,
+    //Callout,
+    Sidebar,
+    AppAside,
+    AppFooter
+  },
   head() {
     return {
       bodyAttrs: {
@@ -62,5 +62,4 @@ export default {
     window.localStorage.removeItem("token")
   }
 }
-
 </script>

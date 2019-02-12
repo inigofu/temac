@@ -1,25 +1,41 @@
 <template>
-  <b-modal :size="'800'" :visible="gridModal" title="Grid designer" @ok="handleOk" @hidden="handleClose">
+  <b-modal
+    :size="'800'"
+    :visible="gridModal"
+    title="Grid designer"
+    @ok="handleOk"
+    @hidden="handleClose"
+  >
     <template v-if="dataLoaded">
-      <b-carousel id="carousel1"
-                  :interval="0"
-                  v-model="slide"
-                  style="text-shadow: 1px 1px 2px #333;"
-                  controls
-                  indicators
-                  background="#ababab"
-                  class="application-frame"
-                  img-blank
-                  img-height="650"
+      <b-carousel
+        id="carousel1"
+        v-model="slide"
+        :interval="0"
+        style="text-shadow: 1px 1px 2px #333;"
+        controls
+        indicators
+        background="#ababab"
+        class="application-frame"
+        img-blank
+        img-height="650"
       >
-
         <!-- Text slides with image -->
         <b-carousel-slide :caption="schema.name">
-          <griddesigner :schema="schema" @input="updateGrid"/>
+          <griddesigner
+            :schema="schema"
+            @input="updateGrid"
+          />
         </b-carousel-slide>
         <!-- Slides with custom text -->
-        <b-carousel-slide v-for="(tab,index) in tabs" :key="index" :caption="'Tab-' + tab.name" >
-          <griddesigner :schema="tab" @input="updateTabs($event,index)"/>
+        <b-carousel-slide
+          v-for="(tab, index) in tabs"
+          :key="index"
+          :caption="'Tab-' + tab.name"
+        >
+          <griddesigner
+            :schema="tab"
+            @input="updateTabs($event, index)"
+          />
         </b-carousel-slide>
       </b-carousel>
     </template>

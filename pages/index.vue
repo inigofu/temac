@@ -6,7 +6,7 @@
 // import nav from '../_nav'
 import { mapState, mapActions } from "vuex"
 export default {
-  layout:"app",
+  layout: "app",
   name: "Full",
   middleware: "authenticated"
 }

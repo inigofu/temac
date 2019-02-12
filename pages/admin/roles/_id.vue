@@ -1,7 +1,11 @@
 <template>
   <div class="wrapper">
     <template v-if="schemaLoaded && modelLoaded">
-      <customForm :propid="id" :modulename="modulename" :moduleurl="moduleurl"/>
+      <customForm
+        :propid="id"
+        :modulename="modulename"
+        :moduleurl="moduleurl"
+      />
     </template>
   </div>
 </template>
@@ -9,7 +13,7 @@
 import { mapActions, mapState, mapMutations } from "vuex"
 import CustomForm from "~/components/form/form.vue"
 export default {
-  layout:"app",
+  layout: "app",
   name: "Roles",
   middleware: "pagechange",
   components: {

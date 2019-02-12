@@ -1,7 +1,10 @@
 <template>
   <li :class="classList">
     <template v-if="wrapper && wrapper.element">
-      <component :is="wrapper.element" v-bind="wrapper.attributes">
+      <component
+        :is="wrapper.element"
+        v-bind="wrapper.attributes"
+      >
         {{ name }}
       </component>
     </template>

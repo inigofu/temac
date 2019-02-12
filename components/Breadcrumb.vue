@@ -1,8 +1,22 @@
 <template>
   <ol class="breadcrumb">
-    <li v-for="(item, index) in list" :key="index" class="breadcrumb-item">
-      <span v-if="isLast(index)" class="active">{{ showName(item) }}</span>
-      <nuxt-link v-else :to="item">{{ showName(item) }}</nuxt-link>
+    <li
+      v-for="(item, index) in list"
+      :key="index"
+      class="breadcrumb-item"
+    >
+      <span
+        v-if="isLast(index)"
+        class="active"
+      >
+        {{ showName(item) }}
+      </span>
+      <nuxt-link
+        v-else
+        :to="item"
+      >
+        {{ showName(item) }}
+      </nuxt-link>
     </li>
   </ol>
 </template>

@@ -1,17 +1,22 @@
 <template>
   <SidebarNavItem :classes="classList.navItem">
-    <a :class="classList.navLink" :href="url"><i :class="classList.icon"/> {{ name }}</a>
+    <a
+      :class="classList.navLink"
+      :href="url"
+    >
+      <i :class="classList.icon" /> {{ name }}
+    </a>
   </SidebarNavItem>
 </template>
 
 <script>
 import SidebarNavItem from "./SidebarNavItem"
-import SidebarNavLink from "./SidebarNavLink"
+//import SidebarNavLink from "./SidebarNavLink"
 export default {
   name: "SidebarNavLabel",
   components: {
-    SidebarNavItem,
-    SidebarNavLink
+    SidebarNavItem//,
+ //   SidebarNavLink
   },
   props: {
     name: {

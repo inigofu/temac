@@ -3,7 +3,6 @@
 </template>
 
 <script>
-
 const VueFormGenerator = () => import("../../components/formGenerator")
 export default {
   mixins: [VueFormGenerator.abstractField]

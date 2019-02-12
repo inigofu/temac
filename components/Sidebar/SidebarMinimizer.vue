@@ -1,5 +1,12 @@
 <template>
-  <button class="sidebar-minimizer" type="button" @click="sidebarMinimize();brandMinimize()"/>
+  <button
+    class="sidebar-minimizer"
+    type="button"
+    @click="
+      sidebarMinimize()
+      brandMinimize()
+    "
+  />
 </template>
 <script>
 export default {

@@ -1,11 +1,14 @@
 <template>
-  <div :class="classnames" :style="{ cursor, userSelect }" @mousedown="onMouseDown">
-    <slot/>
+  <div
+    :class="classnames"
+    :style="{ cursor, userSelect }"
+    @mousedown="onMouseDown"
+  >
+    <slot />
   </div>
 </template>
 
-<script src="./multipane.js">
-</script>
+<script src="./multipane.js"></script>
 
 <style lang="scss">
 .multipane {

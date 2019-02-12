@@ -19,7 +19,6 @@
     "@casl/ability": "^2.5.1",
     "@casl/vue": "^0.5.0",
     "axios": "^0.18.0",
-    "babel-loader": "^8.0.5",
     "bootstrap-vue": "^2.0.0-rc.11",
     "chart.js": "^2.7.3",
     "fecha": "^3.0.2",
@@ -37,6 +36,13 @@
     "vuedraggable": "^2.17.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.13.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-vue": "^5.1.0",
     "glob-all": "^3.1.0",
     "node-sass": "^4.11.0",
     "pug": "^2.0.3",

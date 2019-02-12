@@ -30,6 +30,7 @@ export default {
       } else if (values !== undefined) {
         return this.groupValues(values)
       }
+      return null
     }
   },
 
@@ -147,5 +148,4 @@ export default {
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>

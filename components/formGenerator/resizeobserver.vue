@@ -1,43 +1,104 @@
 <template>
-
-  <div >
-    <div :style= "{width : field.offset + 'px'}" class="offset no-changes"/>
-    <div :class="{draggable: draggable, resizable: resizable, active: enabled, dragging: dragging, resizing: resizing }" :style= "{width : field.width + 'px'}"
-
-         class="width easing"
-         @mousedown.stop="elmDown"
-         @touchstart.prevent.stop="elmDown" @dblclick="fillParent">
+  <div>
+    <div
+      :style="{ width: field.offset + 'px' }"
+      class="offset no-changes"
+    />
+    <div
+      :class="{
+        draggable: draggable,
+        resizable: resizable,
+        active: enabled,
+        dragging: dragging,
+        resizing: resizing
+      }"
+      :style="{ width: field.width + 'px' }"
+      class="width easing"
+      @mousedown.stop="elmDown"
+      @touchstart.prevent.stop="elmDown"
+      @dblclick="fillParent"
+    >
       <div class="nested hidden">
-        <i class="icon-th"/>
+        <i class="icon-th" />
       </div>
       <div class="classes">
-        <div class="xs-width">xs-{{ field.xs }}</div>
-        <div class="xs-offset">xs-offset-{{ field.xs_offset }}</div>
-        <div class="sm-width">sm{{ field.sm }}</div>
-        <div class="sm-offset">sm-offset-{{ field.sm_offset }}</div>
-        <div class="md-width">md-{{ field.md }}</div>
-        <div class="md-offset">md-offset-{{ field.md_offset }}</div>
-        <div class="lg-width">lg-{{ field.lg }}</div>
-        <div class="lg-offset">lg-offset-{{ field.lg_offset }}</div>
+        <div class="xs-width">
+          xs-{{ field.xs }}
+        </div>
+        <div class="xs-offset">
+          xs-offset-{{ field.xs_offset }}
+        </div>
+        <div class="sm-width">
+          sm{{ field.sm }}
+        </div>
+        <div class="sm-offset">
+          sm-offset-{{ field.sm_offset }}
+        </div>
+        <div class="md-width">
+          md-{{ field.md }}
+        </div>
+        <div class="md-offset">
+          md-offset-{{ field.md_offset }}
+        </div>
+        <div class="lg-width">
+          lg-{{ field.lg }}
+        </div>
+        <div class="lg-offset">
+          lg-offset-{{ field.lg_offset }}
+        </div>
       </div>
-      <div v-for="handle in handles" v-if="resizable" :key="handle" :class="'handle-' + handle" :style="{ display: enabled ? 'block' : 'none'}" class="handle"
-           @mousedown.stop.prevent="handleDown(handle, $event)" @touchstart.stop.prevent="handleDown(handle, $event)"/>
-      <slot/>
-      <div v-if="fieldVisible(field)" class="form-group">
-        <label v-if="fieldTypeHasLabel(field)" :for="getFieldID(field)" :class="field.labelClasses">
-          {{ field.label }}                
+      <div v-if="resizable"> 
+      <div
+        v-for="handle in handles"
+        
+        :key="handle"
+        :class="'handle-' + handle"
+        :style="{ display: enabled ? 'block' : 'none' }"
+        class="handle"
+        @mousedown.stop.prevent="handleDown(handle, $event)"
+        @touchstart.stop.prevent="handleDown(handle, $event)"
+      />
+      </div>
+      <slot />
+      <div
+        v-if="fieldVisible(field)"
+        class="form-group"
+      >
+        <label
+          v-if="fieldTypeHasLabel(field)"
+          :for="getFieldID(field)"
+          :class="field.labelClasses"
+        >
+          {{ field.label }}
         </label>
         <div class="field-wrap">
-          <component :is="getFieldType(field)" :disabled="fieldDisabled(field)" :schema="field"/>
-          <div v-if="buttonVisibility(field)" class="buttons">
-            <button v-for="(btn,index) in field.buttons" :key="index" :class="btn.classes"> {{ btn.label }}</button>
+          <component
+            :is="getFieldType(field)"
+            :disabled="fieldDisabled(field)"
+            :schema="field"
+          />
+          <div
+            v-if="buttonVisibility(field)"
+            class="buttons"
+          >
+            <button
+              v-for="(btn, index) in field.buttons"
+              :key="index"
+              :class="btn.classes"
+            >
+              {{ btn.label }}
+            </button>
           </div>
-          <div v-if="field.hint" class="hint"> {{ fieldHint(field) }}</div>
+          <div
+            v-if="field.hint"
+            class="hint"
+          >
+            {{ fieldHint(field) }}
+          </div>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -833,7 +894,7 @@ export default {
 }
 </script>
 
-<style scoped  lang="scss">
+<style scoped lang="scss">
 .vdr {
   position: absolute;
 

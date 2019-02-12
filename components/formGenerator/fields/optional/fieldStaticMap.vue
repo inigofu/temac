@@ -50,6 +50,7 @@ export default {
           return url
         }
       }
+      return null
     }
   }
 }

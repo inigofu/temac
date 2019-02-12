@@ -1,16 +1,23 @@
-import PurgecssPlugin from 'purgecss-webpack-plugin'
-import glob from 'glob-all'
-import path from 'path'
-import webpack from 'webpack'
-
+import webpack from "webpack"
+const changeLoaderOptions = loaders => {
+  if (loaders) {
+    for (const loader of loaders) {
+      if (loader.loader === "sass-loader") {
+        Object.assign(loader.options, {
+          includePaths: ["./assets"]
+        })
+      }
+    }
+  }
+}
 module.exports = {
-  //mode: 'spa', 
+  //mode: 'spa',
   render: {
     compressor: { threshold: 6 }
   },
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     title: "temac",
     meta: [
@@ -21,38 +28,38 @@ module.exports = {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   /*
-  ** Customize the progress bar color
-  */
+   ** Customize the progress bar color
+   */
   loading: { color: "#3B8070" },
   css: [
     /* Import Font Awesome Icons Set */
     //'~/node_modules/flag-icon-css/css/flag-icon.min.css',
     /* Import Font Awesome Icons Set */
-    '~/node_modules/font-awesome/css/font-awesome.min.css',
+    "~/node_modules/font-awesome/css/font-awesome.min.css",
     /* Import Simple Line Icons Set */
-    '~/node_modules/simple-line-icons/css/simple-line-icons.css',
+    "~/node_modules/simple-line-icons/css/simple-line-icons.css",
     /* Import Bootstrap Vue Styles */
-    '~/node_modules/bootstrap-vue/dist/bootstrap-vue.css',
+    "~/node_modules/bootstrap-vue/dist/bootstrap-vue.css",
     /* Import Core SCSS */
-    { src: '~/assets/scss/style.scss', lang: 'scss' }
+    { src: "~/assets/scss/style.scss", lang: "scss" }
   ],
-   /*
-  ** Style resources configuration
-  */
- styleResources: {
-  scss: './assets/scss/style.scss'
-},
   /*
-  ** plugins
-  */
-  plugins: [ "~/plugins/casl"],
+   ** Style resources configuration
+   */
+  styleResources: {
+    scss: "./assets/scss/style.scss"
+  },
   /*
-  ** modules
-  */
-  modules: [/*"@nuxtjs/pwa"*/, 'bootstrap-vue/nuxt'],
+   ** plugins
+   */
+  plugins: ["~/plugins/casl"],
   /*
-  ** Build configuration
-  */
+   ** modules
+   */
+  modules: [, /*"@nuxtjs/pwa"*/ "bootstrap-vue/nuxt"],
+  /*
+   ** Build configuration
+   */
 
   build: {
     extractCSS: true,
@@ -64,7 +71,7 @@ module.exports = {
     analyze: {
       analyzerMode: "static"
     },
-    'html.minify': {
+    "html.minify": {
       collapseBooleanAttributes: true,
       decodeEntities: true,
       minifyCSS: true,
@@ -76,26 +83,41 @@ module.exports = {
       useShortDoctype: true
     },
     /*
-    ** Run ESLint on save
-    */
+     ** Run ESLint on save
+     */
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
-        //config.devtool = '#source-map'
+        config.module.rules.push({
+          enforce: "pre",
+          test: /\.(js|vue)$/,
+          loader: "eslint-loader",
+          exclude: /(node_modules)/
+        })
+
+        const vueLoader = config.module.rules.find(
+          ({ loader }) => loader === "vue-loader"
+        )
+        const {
+          options: { loaders }
+        } = vueLoader || { options: {} }
+
+        if (loaders) {
+          for (const loader of Object.values(loaders)) {
+            changeLoaderOptions(Array.isArray(loader) ? loader : [loader])
+          }
+        }
+
+        config.module.rules.forEach(rule => changeLoaderOptions(rule.use))
+
+        config.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
       }
-      if (!isDev) {
-        config.plugins.push(
-          new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-        )       
-      }
-    }//,
+    } //,
     //vendor: ["@casl/vue"]
   },
   /*
-  ** Router configuration
-  */
+   ** Router configuration
+   */
   router: {
     middleware: "check-auth"
   }
-
-  
 }

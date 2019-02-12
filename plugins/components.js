@@ -13,7 +13,7 @@ import CardBarChartExample from "~/components/dashboard/CardBarChartExample"
 import MainChartExample from "~/components/dashboard/MainChartExample"
 import SocialBoxChartExample from "~/components/dashboard/SocialBoxChartExample"
 import CalloutChartExample from "~/components/dashboard/CalloutChartExample"
-import  { VueContext }  from "vue-context"
+import { VueContext } from "vue-context"
 
 Vue.component("AppAside", AppAside)
 Vue.component("Breadcrumb", Breadcrumb)

@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
   input.form-control(type='text', :value='value', :autocomplete='schema.autocomplete', :disabled='disabled', :placeholder='schema.placeholder', :readonly='schema.readonly', :name='schema.inputName', :id='getFieldID(schema)')
 </template>
 
@@ -79,7 +79,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 .vue-form-generator .field-cleave {
 }
 </style>

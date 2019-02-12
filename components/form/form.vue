@@ -1,47 +1,150 @@
 <template>
   <div class="wrapper">
-    <multipane class="custom-resizer" layout="vertical" @paneResize="paneResizeStop">
-      <div :class="[model ? 'd-none d-lg-block' : '' ,'']" :style="{minWidth: '20%' , width: panWidth}">
-        <b-form-group horizontal label="Filter" class="mb-0">
+    <multipane
+      class="custom-resizer"
+      layout="vertical"
+      @paneResize="paneResizeStop"
+    >
+      <div
+        :class="[model ? 'd-none d-lg-block' : '', '']"
+        :style="{ minWidth: '20%', width: panWidth }"
+      >
+        <b-form-group
+          horizontal
+          label="Filter"
+          class="mb-0"
+        >
           <b-input-group>
-            <b-form-input v-model="filter" placeholder="Type to Search" />
+            <b-form-input
+              v-model="filter"
+              placeholder="Type to Search"
+            />
             <b-input-group-append>
-              <b-btn :disabled="!filter" @click="filter = ''">Clear</b-btn>
+              <b-btn
+                :disabled="!filter"
+                @click="filter = ''"
+              >
+                Clear
+              </b-btn>
             </b-input-group-append>
           </b-input-group>
         </b-form-group>
         <div class="tablepane">
-          <data-table :rows="rows" :fields="fields" :select="selectRow" :stacked="stacked" :filter="filter"/>
+          <data-table
+            :rows="rows"
+            :fields="fields"
+            :select="selectRow"
+            :stacked="stacked"
+            :filter="filter"
+          />
         </div>
       </div>
-      <multipane-resizer class="d-none d-lg-block"/>
-      <div :class="[model ? '' : 'd-none d-lg-block' ,'pane']" :style="{ flexGrow: 1, maxWidth:'100%', width: '20%' }">
+      <multipane-resizer class="d-none d-lg-block" />
+      <div
+        :class="[model ? '' : 'd-none d-lg-block', 'pane']"
+        :style="{ flexGrow: 1, maxWidth: '100%', width: '20%' }"
+      >
         <div>
           <div class="control-buttons text-center">
-            <b-button class="btn btn-default new" @click="newModel"> <i class="fa fa-plus"/>New</b-button>
-            <b-button class="btn btn-primary save" @click="saveModel"> <i class="fa fa-floppy-o"/>Save<i v-if="showWarning()" class="fa fa-warning"/></b-button>
-            <b-button class="btn btn-danger delete" @click="deleteModel"> <i class="fa fa-trash"/>Delete</b-button>
-            <b-button v-if="$can('update', 'griddesigner')" type="button" variant="info" @click="gridModalShow">Grid designer</b-button>
+            <b-button
+              class="btn btn-default new"
+              @click="newModel"
+            >
+              <i class="fa fa-plus" />New
+            </b-button>
+            <b-button
+              class="btn btn-primary save"
+              @click="saveModel"
+            >
+              <i class="fa fa-floppy-o" />Save<i
+                v-if="showWarning()"
+                class="fa fa-warning"
+              />
+            </b-button>
+            <b-button
+              class="btn btn-danger delete"
+              @click="deleteModel"
+            >
+              <i class="fa fa-trash" />Delete
+            </b-button>
+            <b-button
+              v-if="$can('update', 'griddesigner')"
+              type="button"
+              variant="info"
+              @click="gridModalShow"
+            >
+              Grid designer
+            </b-button>
           </div>
           <div class="errors text-center">
-            <div v-for="(item, index) in errors" :key="index" track-by="index" class="alert alert-danger">{{ item.field.label }}: <strong>{{ item.error }}</strong></div>
+            <div
+              v-for="(item, index) in errors"
+              :key="index"
+              track-by="index"
+              class="alert alert-danger"
+            >
+              {{ item.field.label }}: <strong>{{ item.error }}</strong>
+            </div>
           </div>
-          <vue-form-generator ref="form" :schema="schema" :model="model" :options="formOptions" :is-new-model="isNewModel" @validated="onValidated('form',...arguments)"/>
+          <vue-form-generator
+            ref="form"
+            :schema="schema"
+            :model="model"
+            :options="formOptions"
+            :is-new-model="isNewModel"
+            @validated="onValidated('form', ...arguments)"
+          />
         </div>
         <div>
-          <b-tabs >
-            <b-tab v-for="(tab,index) in schematabs" :key="tab.tabs.idcode" :title= "tab.tabs.name">
+          <b-tabs>
+            <b-tab
+              v-for="(tab, index) in schematabs"
+              :key="tab.tabs.idcode"
+              :title="tab.tabs.name"
+            >
               <div class="control-buttons text-center">
-                <b-button v-if="tab.tabs.multiline" class="btn btn-default new" @click="newLine(tab.tabs.name, index)"> <i class="fa fa-plus"/>New line</b-button>
+                <b-button
+                  v-if="tab.tabs.multiline"
+                  class="btn btn-default new"
+                  @click="newLine(tab.tabs.name, index)"
+                >
+                  <i class="fa fa-plus" />New line
+                </b-button>
               </div>
-              <vue-form-generator-table v-if="tab.tabs.multiline" :index="index" :model="tab.model" :name="tab.tabs.name" :parentid="id" :modulename="modulename" :options="formOptions" :is-new-model="isNewModel" @validated="onValidated(tab.tabs.name,...arguments)"/>
-              <vue-form-generator v-if="isNotMultiline(tab.tabs.multiline)" :schema="tab.tabs" :index="index" :model="tab.model" :name="tab.tabs.name" :parentid="id" :modulename="modulename" :options="formOptions" :is-new-model="isNewModel" @validated="onValidated(tab.tabs.name,...arguments)"/>
+              <vue-form-generator-table
+                v-if="tab.tabs.multiline"
+                :index="index"
+                :model="tab.model"
+                :name="tab.tabs.name"
+                :parentid="id"
+                :modulename="modulename"
+                :options="formOptions"
+                :is-new-model="isNewModel"
+                @validated="onValidated(tab.tabs.name, ...arguments)"
+              />
+              <vue-form-generator
+                v-if="isNotMultiline(tab.tabs.multiline)"
+                :schema="tab.tabs"
+                :index="index"
+                :model="tab.model"
+                :name="tab.tabs.name"
+                :parentid="id"
+                :modulename="modulename"
+                :options="formOptions"
+                :is-new-model="isNewModel"
+                @validated="onValidated(tab.tabs.name, ...arguments)"
+              />
             </b-tab>
           </b-tabs>
         </div>
       </div>
     </multipane>
-    <gridcarrusel :grid-modal="gridModal" :modulename="modulename" :moduleurl="moduleurl" @close="handleClose" />
+    <gridcarrusel
+      :grid-modal="gridModal"
+      :modulename="modulename"
+      :moduleurl="moduleurl"
+      @close="handleClose"
+    />
     <b-modal ref="beforegridModal">
       Hello From My Modal!
     </b-modal>
@@ -51,9 +154,12 @@
 <script>
 import Vue from "vue"
 import { mapState, mapActions, mapMutations } from "vuex"
-const VueFormGenerator = () => import("../../components/formGenerator/formGenerator.vue")
-const gridcarrusel = () => import("../../components/formGenerator/gridCarrusel.vue")
-const VueFormGeneratorTable = () => import("../../components/formGenerator/formGeneratorTable.vue")
+const VueFormGenerator = () =>
+  import("../../components/formGenerator/formGenerator.vue")
+const gridcarrusel = () =>
+  import("../../components/formGenerator/gridCarrusel.vue")
+const VueFormGeneratorTable = () =>
+  import("../../components/formGenerator/formGeneratorTable.vue")
 import { Multipane, MultipaneResizer } from "../../components/multipane"
 const DataTable = () => import("./dataTable.vue")
 import { filters } from "./utils"
@@ -76,7 +182,7 @@ Vue.component("fieldAwesome", FieldAwesome)
 // Vue.use(VueFormGenerator)
 
 export default {
-  name: "customForm",
+  name: "CustomForm",
   components: {
     DataTable,
     VueFormGenerator,
@@ -181,7 +287,7 @@ export default {
   },
   watch: {
     id: function(newId, oldId) {
-      console.log('filtering',newId)
+      console.log("filtering", newId)
       if (newId === "new") {
         let newRow = this.createDefaultObject(this.schema)
         this.isNewModel = true
@@ -193,11 +299,11 @@ export default {
           el.focus()
         }
       } else {
-        console.log('beforefilter',this.rows,'newId',newId)
+        console.log("beforefilter", this.rows, "newId", newId)
         var row = this.rows.filter(p => {
           return p.idcode === newId
         })
-        console.log('afterfilter',row,'newId',newId)
+        console.log("afterfilter", row, "newId", newId)
         this.isNewModel = false
         this.model = cloneDeep(row[0])
       }
@@ -255,7 +361,7 @@ export default {
       this.isNewModel = false
       this.rowSelected = true
       this.changed = false
-      
+
       //this.$router.push("/" + this.moduleurl + "/" + record.idcode + "?")
       //this.$router.push({path:"/" + this.moduleurl+ "/" + record.idcode});
     },
@@ -310,7 +416,9 @@ export default {
     deleteModel() {
       this.deleteModelVuex(this.model)
         .then(response => {
-          this.$router.push("/" + this.moduleurl + "/" + this.rows[response].idcode)
+          this.$router.push(
+            "/" + this.moduleurl + "/" + this.rows[response].idcode
+          )
         })
         .catch(response => {
           // fail
@@ -432,13 +540,13 @@ export default {
   mounted() {
     // this.rows = users.users()
     console.log("propid", this.propid)
-    if (this.propid!==undefined) {
+    if (this.propid !== undefined) {
       var row = this.rows.filter(p => {
-          return p.idcode === this.propid
-        })
-        console.log('afterfilter',row,'newId',this.propid)
-        this.isNewModel = false
-        this.model = cloneDeep(row[0])
+        return p.idcode === this.propid
+      })
+      console.log("afterfilter", row, "newId", this.propid)
+      this.isNewModel = false
+      this.model = cloneDeep(row[0])
     }
     if (document.documentElement.clientWidth < 991.98) {
       this.panWidth = "100%"

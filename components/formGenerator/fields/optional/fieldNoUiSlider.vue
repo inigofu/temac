@@ -1,5 +1,9 @@
 <template>
-  <div :disabled="disabled" :class="{ 'contain-pips': containPips, 'contain-tooltip': containTooltip }" class="slider"/>
+  <div
+    :disabled="disabled"
+    :class="{ 'contain-pips': containPips, 'contain-tooltip': containTooltip }"
+    class="slider"
+  />
 </template>
 
 <script>
@@ -112,7 +116,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 .vue-form-generator .field-noUiSlider {
   .field-wrap {
     display: block;

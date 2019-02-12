@@ -2,65 +2,161 @@
   <div class="application-frame easing">
     <div class="panels-wrapper">
       <div class="navigator easing">
-        <div :class="['preview' , 'xs' , 'easing' ,preview==='xs' ? 'active' : '']" @click= "selectPreview('xs')">
+        <div
+          :class="['preview', 'xs', 'easing', preview === 'xs' ? 'active' : '']"
+          @click="selectPreview('xs')"
+        >
           <div class="title-bar">
-            <div class="size-icon"><i class="icon-mobile-phone"/></div>
-            <div class="title">Phone</div>
+            <div class="size-icon">
+              <i class="icon-mobile-phone" />
+            </div>
+            <div class="title">
+              Phone
+            </div>
           </div>
           <div class="preview-container">
-            <div class="preview-rows" style="width: 50.4px;">
-              <div v-for="(group,index) in grid.groups" :key="index" class="preview-row">
-                <div v-for="(col,indexcol) in group.fields" :key="indexcol" class="preview-col">
-                  <div :style = "{width : preview_xsoffset(col) + 'px'}" class="preview-col-offset"/>
-                  <div :style = "{width : preview_xs(col) + 'px'}" class="preview-col-width"/>
+            <div
+              class="preview-rows"
+              style="width: 50.4px;"
+            >
+              <div
+                v-for="(group, index) in grid.groups"
+                :key="index"
+                class="preview-row"
+              >
+                <div
+                  v-for="(col, indexcol) in group.fields"
+                  :key="indexcol"
+                  class="preview-col"
+                >
+                  <div
+                    :style="{ width: preview_xsoffset(col) + 'px' }"
+                    class="preview-col-offset"
+                  />
+                  <div
+                    :style="{ width: preview_xs(col) + 'px' }"
+                    class="preview-col-width"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div :class="['preview' , 'sm' , 'easing' ,preview==='sm' ? 'active' : '']" @click= "selectPreview('sm')">
+        <div
+          :class="['preview', 'sm', 'easing', preview === 'sm' ? 'active' : '']"
+          @click="selectPreview('sm')"
+        >
           <div class="title-bar">
-            <div class="size-icon"><i class="icon-tablet"/></div>
-            <div class="title">Tablet</div>
+            <div class="size-icon">
+              <i class="icon-tablet" />
+            </div>
+            <div class="title">
+              Tablet
+            </div>
           </div>
           <div class="preview-container">
-            <div class="preview-rows" style="width: 79.2px;">
-              <div v-for="(group,index) in grid.groups" :key="index" class="preview-row">
-                <div v-for="(col,indexcol) in group.fields" :key="indexcol" class="preview-col">
-                  <div :style = "{width : preview_smoffset(col) + 'px'}" class="preview-col-offset"/>
-                  <div :style = "{width : preview_sm(col) + 'px'}" class="preview-col-width"/>
+            <div
+              class="preview-rows"
+              style="width: 79.2px;"
+            >
+              <div
+                v-for="(group, index) in grid.groups"
+                :key="index"
+                class="preview-row"
+              >
+                <div
+                  v-for="(col, indexcol) in group.fields"
+                  :key="indexcol"
+                  class="preview-col"
+                >
+                  <div
+                    :style="{ width: preview_smoffset(col) + 'px' }"
+                    class="preview-col-offset"
+                  />
+                  <div
+                    :style="{ width: preview_sm(col) + 'px' }"
+                    class="preview-col-width"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div :class="['preview' , 'md' , 'easing' ,preview==='md' ? 'active' : '']" @click= "selectPreview('md')">
+        <div
+          :class="['preview', 'md', 'easing', preview === 'md' ? 'active' : '']"
+          @click="selectPreview('md')"
+        >
           <div class="title-bar">
-            <div class="size-icon"><i class="icon-laptop"/></div>
-            <div class="title">Desktop</div>
+            <div class="size-icon">
+              <i class="icon-laptop" />
+            </div>
+            <div class="title">
+              Desktop
+            </div>
           </div>
           <div class="preview-container">
-            <div class="preview-rows" style="width: 115.2px;">
-              <div v-for="(group,index) in grid.groups" :key="index" class="preview-row">
-                <div v-for="(col,indexcol) in group.fields" :key="indexcol" class="preview-col">
-                  <div :style = "{width : preview_mdoffset(col) + 'px'}" class="preview-col-offset"/>
-                  <div :style = "{width : preview_md(col) + 'px'}" class="preview-col-width"/>
+            <div
+              class="preview-rows"
+              style="width: 115.2px;"
+            >
+              <div
+                v-for="(group, index) in grid.groups"
+                :key="index"
+                class="preview-row"
+              >
+                <div
+                  v-for="(col, indexcol) in group.fields"
+                  :key="indexcol"
+                  class="preview-col"
+                >
+                  <div
+                    :style="{ width: preview_mdoffset(col) + 'px' }"
+                    class="preview-col-offset"
+                  />
+                  <div
+                    :style="{ width: preview_md(col) + 'px' }"
+                    class="preview-col-width"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div :class="['preview' , 'lg' , 'easing' ,preview==='lg' ? 'active' : '']" @click= "selectPreview('lg')">
+        <div
+          :class="['preview', 'lg', 'easing', preview === 'lg' ? 'active' : '']"
+          @click="selectPreview('lg')"
+        >
           <div class="title-bar">
-            <div class="size-icon"><i class="icon-desktop"/></div>
-            <div class="title">Large Desktop</div>
+            <div class="size-icon">
+              <i class="icon-desktop" />
+            </div>
+            <div class="title">
+              Large Desktop
+            </div>
           </div>
           <div class="preview-container">
-            <div class="preview-rows" style="width: 144px;">
-              <div v-for="(group,index) in grid.groups" :key="index" class="preview-row">
-                <div v-for="(col,indexcol) in group.fields" :key="indexcol" class="preview-col">
-                  <div :style = "{width : preview_lgoffset(col) + 'px'}" class="preview-col-offset"/>
-                  <div :style = "{width : preview_lg(col)+ 'px'}" class="preview-col-width"/>
+            <div
+              class="preview-rows"
+              style="width: 144px;"
+            >
+              <div
+                v-for="(group, index) in grid.groups"
+                :key="index"
+                class="preview-row"
+              >
+                <div
+                  v-for="(col, indexcol) in group.fields"
+                  :key="indexcol"
+                  class="preview-col"
+                >
+                  <div
+                    :style="{ width: preview_lgoffset(col) + 'px' }"
+                    class="preview-col-offset"
+                  />
+                  <div
+                    :style="{ width: preview_lg(col) + 'px' }"
+                    class="preview-col-width"
+                  />
                 </div>
               </div>
             </div>
@@ -68,29 +164,55 @@
         </div>
       </div>
       <div class="workspace easing output-collapsed">
-        <div :class = "['sl-container', preview ]">
+        <div :class="['sl-container', preview]">
           <div class="columns">
-            <div class="columna"/>
-            <div class="columna"/>
-            <div class="columna"/>
-            <div class="columna"/>
-            <div class="columna"/>
-            <div class="columna"/>
-            <div class="columna"/>
-            <div class="columna"/>
-            <div class="columna"/>
-            <div class="columna"/>
-            <div class="columna"/>
-            <div class="columna"/>
+            <div class="columna" />
+            <div class="columna" />
+            <div class="columna" />
+            <div class="columna" />
+            <div class="columna" />
+            <div class="columna" />
+            <div class="columna" />
+            <div class="columna" />
+            <div class="columna" />
+            <div class="columna" />
+            <div class="columna" />
+            <div class="columna" />
           </div>
           <div class="rows">
-            <div v-for="(group,index) in grid.groups" id = "row-" :key="index" class="sl-row easing">
-              <draggable v-model="group.fields" :options="dragOptions" :move="onMove" class="cols" element="div" @start="drag=false" @end="onEndDrag">
-
-                <resize-observer v-for="(col,indexcol) in group.fields" id="col-3" :key="indexcol" :preview="preview" :grid="[77,77]" :w="col.width" :x="col.offset" v-model="group.fields[indexcol]" :field="col" class="columna dragging" @resizing="onChange"/>
-
+            <div
+              v-for="(group, index) in grid.groups"
+              id="row-"
+              :key="index"
+              class="sl-row easing"
+            >
+              <draggable
+                v-model="group.fields"
+                :options="dragOptions"
+                :move="onMove"
+                class="cols"
+                element="div"
+                @start="drag = false"
+                @end="onEndDrag"
+              >
+                <resize-observer
+                  v-for="(col, indexcol) in group.fields"
+                  id="col-3"
+                  :key="indexcol"
+                  v-model="group.fields[indexcol]"
+                  :preview="preview"
+                  :grid="[77, 77]"
+                  :w="col.width"
+                  :x="col.offset"
+                  :field="col"
+                  class="columna dragging"
+                  @resizing="onChange"
+                />
               </draggable>
-              <input class="row-name" placeholder="Name Row">
+              <input
+                class="row-name"
+                placeholder="Name Row"
+              >
             </div>
           </div>
         </div>
